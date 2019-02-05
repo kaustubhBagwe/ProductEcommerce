@@ -23,6 +23,17 @@
             margin-right: 5px;
         }
 
+        
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky{
+  padding-top: 3px;
+}
+
         .banner {
             background-image: url(http://demo.devitems.com/jadusona-v2/assets/images/hero/hero-1.jpg);
             background-repeat: no-repeat;
@@ -1007,8 +1018,43 @@
           }
         }
     </style>
+    @*<script>
+
+        window.onscroll = function () { myFunction() };
+        var distance = $('#TopNvbar').offset().top;
+   
+
+        function myFunction() {
+            debugger
+            if ($(this).scrollTop() >= distance) {
+                $("#SecondNvbar").addClass("sticky");
+                $("#TopNvbar").hide();
+
+            } else {
+                $("#TopNvbar").show();
+                $("#SecondNvbar").removeClass("sticky");
+            }
+        }
+        </script>*@
+
     <script>
+
+     
         $(document).ready(function () {
+
+            var stickySidebar = $('#TopNvbar').offset().top;
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > stickySidebar) {
+                    $("#SecondNvbar").addClass("sticky");
+                    $("#TopNvbar").hide();
+                }
+                else {
+                    $("#TopNvbar").show();
+                    $("#SecondNvbar").removeClass("sticky");
+                }
+            });
+
+
 
             $('nav li').hover(
        function () {
@@ -1056,13 +1102,13 @@
     </script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top firstnavbar">
+    <div class="navbar navbar-inverse navbar-fixed-top firstnavbar" id="TopNvbar">
         <div class="container">
          
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                    <li class="dropdown">
+            <div >
+                <ul class="nav navbar-nav" style="display: inline-block;">
+                  
+                    <li class="dropdown" style="float:left;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> English <span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-cart" role="menu" style="z-index:1030">
                             <li><a class="text-center" href="">English</a></li>
@@ -1072,13 +1118,13 @@
                             <li><a class="text-center" href="">Chinese</a></li>
                         </ul>
                     </li>
-                    </li>
-                    <li>@Html.ActionLink("Login", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Wishlist", "About", "Home")</li>
-                    <li><a href="#StoreLocator">Store Location</a></li>
-                    <li>@Html.ActionLink("+91 8087958141", "Contact", "Home")</li>
+                   
+                    <li style="float:left;"><a href="#"><i style="font-size: 18px;" class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li style="float:left;"><a href="#"><i style="font-size: 18px;" class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li style="float:left;"><a href="#"><i style="font-size: 18px;" class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                  
                 </ul>
-                <div class="Search-Container">
+                <div class="Search-Container" display: inline-block;>
                     <form>
                         <input type="text" placeholder="Search.." name="Search" />
                         <button type="submit">Search</button>
@@ -1087,7 +1133,7 @@
             </div>
         </div>
     </div>
-    <div class="navbar secondnavbar">
+    <div class="navbar secondnavbar"  id="SecondNvbar">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="border:1px solid #aba9a9">
@@ -1134,8 +1180,72 @@
                     </ul>*@
                 @*@Html.Partial("_LoginPartial")*@
                 <ul class="nav navbar-nav navbar-right">
+                   @* <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
                     <li class="dropdown">
-                        <a href="#" id="shopcart" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 0 - Items<span class="caret"></span></a>
+                        <a href="#" style="font-size: 18px;" id="shopcart" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-heart-o" aria-hidden="true"></i> <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-cart" role="menu">
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item name</span>
+                                            <span>23$</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item name</span>
+                                            <span>23$</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item name</span>
+                                            <span>23$</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item name</span>
+                                            <span>23$</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a class="text-center" href="">View Wishlist</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" style="font-size: 16px;" id="shopcart" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 0 <span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-cart" role="menu">
                             <li>
                                 <span class="item">
