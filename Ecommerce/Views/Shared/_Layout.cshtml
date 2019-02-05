@@ -1,0 +1,1215 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce Template</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.c om/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .checked {
+  color: orange;
+}
+        .leftbordertheame {
+            border-left: 3px solid #ffd800;
+            margin-right: 5px;
+        }
+
+        .banner {
+            background-image: url(http://demo.devitems.com/jadusona-v2/assets/images/hero/hero-1.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .AddtoCartbtn {
+            padding: 9px;
+            border: 2px solid #03A9F4;
+            background: none;
+            color: #03A9F4;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+            .AddtoCartbtn:hover {
+                padding: 9px;
+                border: 2px solid #03A9F4;
+                background: #03A9F4;
+                color: #fff;
+                border-radius: 5px;
+                font-weight: 600;
+                transition: 0.20s ease-in;
+            }
+
+        .spliter {
+            height: 5px;
+            background-color: cadetblue;
+            width: 200px;
+            text-align: center;
+            margin-left: 40%;
+            margin-bottom: 50px;
+        }
+
+        .storelocator {
+            display: none;
+            float: right;
+            width: 19%;
+            margin-right: 52px;
+            margin-top: -245px;
+            border-radius: 5px;
+            border: 1px solid #c6c6c6;
+            color: #626060;
+            box-shadow: 0px 0px 15px #c6c6c6;
+        }
+
+        .Bannertext {
+              width: 50%;
+    margin-right: 52px;
+    margin-top: 85px;
+    margin-left: 8%;
+    color: #fff;
+    background: #333333c4;
+    padding: 12px;
+    border-radius:5px;
+        }
+
+        .storelocator h3 {
+            color: #333;
+        }
+
+        .firstnavbar {
+            background-color: #03A9F4;
+            border-color: #2196F3;
+        }
+
+        .secondnavbar {
+            z-index: 1029;
+            border-radius: 0px;
+            border: 1px solid #cbcbcb;
+            margin-bottom: 0px;
+            position: fixed;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0px 3px 12px #c6c6c6;
+        }
+
+        .navbar-collapse .Search-Container {
+            float: right;
+        }
+
+            .navbar-collapse .Search-Container input[type=text] {
+                padding: 6px;
+                margin-top: 8px;
+                font-size: 17px;
+                border: none;
+            }
+
+            .navbar-collapse .Search-Container button {
+                float: right;
+                padding: 6px 10px;
+                margin-top: 8px;
+                margin-right: 16px;
+                background: #ddd;
+                font-size: 17px;
+                border: none;
+                cursor: pointer;
+            }
+
+        ul.dropdown-cart {
+            min-width: 250px;
+        }
+
+            ul.dropdown-cart li .item {
+                display: block;
+                padding: 3px 10px;
+                margin: 3px 0;
+            }
+
+                ul.dropdown-cart li .item:hover {
+                    background-color: #f3f3f3;
+                }
+
+                ul.dropdown-cart li .item:after {
+                    visibility: hidden;
+                    display: block;
+                    font-size: 0;
+                    content: " ";
+                    clear: both;
+                    height: 0;
+                }
+
+            ul.dropdown-cart li .item-left {
+                float: left;
+            }
+
+                ul.dropdown-cart li .item-left img,
+                ul.dropdown-cart li .item-left span.item-info {
+                    float: left;
+                }
+
+                ul.dropdown-cart li .item-left span.item-info {
+                    margin-left: 10px;
+                }
+
+                    ul.dropdown-cart li .item-left span.item-info span {
+                        display: block;
+                    }
+
+            ul.dropdown-cart li .item-right {
+                float: right;
+            }
+
+                ul.dropdown-cart li .item-right button {
+                    margin-top: 14px;
+                }
+
+        .Product {
+            border: #c6c6c6;
+            padding: 12px 12px;
+            width: 250px;
+            text-align: -webkit-center;
+        }
+        .Productnonfilter {
+            border: #c6c6c6;
+            padding: 12px 12px;
+            width: 250px;
+            text-align: -webkit-center;
+        }
+            .Product .ProductImg {
+                height: 240px;
+                width: 240px;
+                border: 1px solid #c6c6c6;
+                /*background-image: url(http://log.ua/images/2018/07/07/kids-clothes-school-uniform-for-boys-velma-category.md.jpg);*/
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+             .Productnonfilter .ProductImg {
+                height: 240px;
+                width: 240px;
+                border: 1px solid #c6c6c6;
+                /*background-image: url(http://log.ua/images/2018/07/07/kids-clothes-school-uniform-for-boys-velma-category.md.jpg);*/
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+
+             .content {
+    position: absolute;
+}
+
+            .bg-theme-one {
+    background-color: #ff708a;
+        max-width: 120px;
+    padding: 7px;
+    color:#fff;
+}
+
+            /*.CategoryImg:hover {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    overflow:hidden;
+}*/
+
+        .banner {
+            height: 350px;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        .CategoryBanner {
+            padding: 12px 12px;
+            text-align: -webkit-center;
+        }
+
+            .CategoryBanner .CategoryImg {
+                height: 240px;
+                width: 100%;
+                border: 1px solid #c6c6c6;
+                background-image: url(http://demo.devitems.com/jadusona-v2/assets/images/banner/banner-1.jpg);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+
+        .OfferBanner {
+            padding: 12px 12px;
+            text-align: -webkit-center;
+        }
+
+            .OfferBanner .OfferImg {
+                height: 310px;
+                width: 100%;
+                border: 1px solid #c6c6c6;
+                background-image: url(http://d3gyiijzpk1c44.cloudfront.net/upload/stores/13499/customization/promo-small2.779c6b98-3f7a-4004-8ab9-c483cb0599cc.jpg);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+
+        #StoreLocator {
+            margin-top: 0px;
+            height: 350px;
+            border: 1px solid #c6c6c6;
+        }
+
+        #AdditionalInfo {
+            height: 350px;
+            border: 1px solid #c6c6c6;
+        }
+
+
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Style the tab */
+        .tab {
+            float: left;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            width: 25%;
+            margin-top: 46px;
+            /*height: 300px;*/
+        }
+
+            /* Style the buttons that are used to open the tab content */
+            .tab button {
+                display: block;
+                background-color: #03A9F4;
+                color: #fff;
+                padding: 22px 16px;
+                width: 100%;
+                border: none;
+                outline: none;
+                text-align: left;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #2196F3;
+                }
+
+                /* Create an active/current "tab button" class */
+                .tab button.active {
+                    background-color: #2196F3;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            float: left;
+            padding: 0px 12px;
+            /*border: 1px solid #ccc;*/
+            width: 75%;
+            /*border-left: none;*/
+            height: 300px;
+            display: none;
+        }
+
+
+        /*nav bar*/
+
+        nav {
+            /*display: grid;*/
+        }
+
+            nav ul {
+                font-size: 0;
+                margin: 0;
+                padding: 0;
+            }
+
+                nav ul li {
+                    display: inline-block;
+                    position: relative;
+                }
+
+                    nav ul li a {
+                        color: #626262;
+                        display: block;
+                        font-size: 14px;
+                        padding: 15px 14px;
+                        tranition: 0.5s linear;
+                    }
+
+                    nav ul li:hover {
+                        background: #126d9b;
+                        color: #fff;
+                        /*border-bottom: 6px solid #126d9b;
+                        margin-bottom: -8px;*/
+                    }
+
+                        nav ul li:hover li a {
+                            color: #fff;
+                        }
+
+
+                        nav ul li:hover:after {
+                            -webkit-animation: circle 1.5s ease-in forwards;
+                        }
+
+                    nav ul li ul {
+                        border-bottom: 5px solid #2ba0db;
+                        display: none;
+                        position: absolute;
+                        width: 250px;
+                    }
+
+                        nav ul li ul li {
+                            border-top: 1px solid #444;
+                            display: block;
+                        }
+
+                            nav ul li ul li:first-child {
+                                border-top: none;
+                            }
+
+                            nav ul li ul li a {
+                                background: #373737;
+                                display: block;
+                                padding: 10px 14px;
+                            }
+
+                                nav ul li ul li a:hover {
+                                    background: #126d9b;
+                                    color: #fff;
+                                    text-decoration: none;
+                                }
+        /*nav bar*/
+    </style>
+    <style>
+
+        /* --------------------------------
+
+        Additional Styles
+
+        -------------------------------- */
+        *, *::after, *::before {
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+
+        html * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+                li {
+                    list-style: none;
+                }
+            /*a {
+              color: #f03d6c;
+              text-decoration: none;
+            }*/
+
+        /* --------------------------------
+
+        Main Components
+
+        -------------------------------- */
+        .cd-header {
+          position: relative;
+          height: 150px;
+          background-color: #70e5cd;
+        }
+        .cd-header h1 {
+          color: #ffffff;
+          line-height: 150px;
+          text-align: center;
+        }
+        @@media only screen and (min-width: 1170px) {
+          .cd-header {
+            height: 180px;
+          }
+          .cd-header h1 {
+            line-height: 180px;
+          }
+        }
+
+        .cd-main-content {
+          position: relative;
+          min-height: 100vh;
+        }
+        .cd-main-content:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        .cd-main-content.is-fixed .cd-tab-filter-wrapper {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+        }
+        .cd-main-content.is-fixed .cd-gallery {
+          padding-top: 76px;
+        }
+        .cd-main-content.is-fixed .cd-filter {
+          position: fixed;
+          height: 100vh;
+          overflow: hidden;
+        }
+        .cd-main-content.is-fixed .cd-filter form {
+          height: 100vh;
+          overflow: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .cd-main-content.is-fixed .cd-filter-trigger {
+          position: fixed;
+        }
+        @@media only screen and (min-width: 768px) {
+          .cd-main-content.is-fixed .cd-gallery {
+            padding-top: 90px;
+          }
+        }
+        @@media only screen and (min-width: 1170px) {
+          .cd-main-content.is-fixed .cd-gallery {
+            padding-top: 100px;
+          }
+        }
+
+        /* --------------------------------
+
+        xtab-filter
+
+        -------------------------------- */
+        .cd-tab-filter-wrapper {
+          background-color: #ffffff;
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+          z-index: 1;
+        }
+        .cd-tab-filter-wrapper:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        .cd-tab-filter {
+          /* tabbed navigation style on mobile - dropdown */
+          position: relative;
+          height: 50px;
+          width: 140px;
+          margin: 0 auto;
+          z-index: 1;
+        }
+        .cd-tab-filter::after {
+          /* small arrow icon */
+          content: '';
+          position: absolute;
+          right: 14px;
+          top: 50%;
+          bottom: auto;
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
+          transform: translateY(-50%);
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          background: url("https://entrusters.com/templates/yoo_moustache/html/com_entrusters_shop/products/ui-img/cd-icon-arrow.svg") no-repeat center center;
+          -webkit-transition: all 0.3s;
+          -moz-transition: all 0.3s;
+          transition: all 0.3s;
+          pointer-events: none;
+        }
+        .cd-tab-filter ul {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: #ffffff;
+          box-shadow: inset 0 -2px 0 #f03d6c;
+        }
+        .cd-tab-filter li {
+          display: none;
+        }
+        .cd-tab-filter li:first-child {
+          /* this way the placehodler is alway visible */
+          display: block;
+        }
+        .cd-tab-filter a {
+          display: block;
+          /* set same size of the .cd-tab-filter */
+          height: 50px;
+          width: 140px;
+          line-height: 50px;
+          padding-left: 14px;
+        }
+        .cd-tab-filter a.selected {
+          background: #f03d6c;
+          color: #ffffff;
+        }
+        .cd-tab-filter.is-open::after {
+          /* small arrow rotation */
+          -webkit-transform: translateY(-50%) rotate(-180deg);
+          -moz-transform: translateY(-50%) rotate(-180deg);
+          -ms-transform: translateY(-50%) rotate(-180deg);
+          -o-transform: translateY(-50%) rotate(-180deg);
+          transform: translateY(-50%) rotate(-180deg);
+        }
+        .cd-tab-filter.is-open ul {
+          box-shadow: inset 0 -2px 0 #f03d6c, 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .cd-tab-filter.is-open ul li {
+          display: block;
+        }
+        .cd-tab-filter.is-open .placeholder a {
+          /* reduces the opacity of the placeholder on mobile when the menu is open */
+          opacity: .4;
+        }
+        @@media only screen and (min-width: 768px) {
+          .cd-tab-filter {
+            /* tabbed navigation style on medium devices */
+            width: auto;
+            cursor: auto;
+          }
+          .cd-tab-filter::after {
+            /* hide the arrow */
+            display: none;
+          }
+          .cd-tab-filter ul {
+            background: transparent;
+            position: static;
+            box-shadow: none;
+            text-align: center;
+          }
+          .cd-tab-filter li {
+            display: inline-block;
+          }
+          .cd-tab-filter li.placeholder {
+            display: none !important;
+          }
+          .cd-tab-filter a {
+            display: inline-block;
+            padding: 0 1em;
+            width: auto;
+            color: #9a9a9a;
+            text-transform: uppercase;
+              }
+          .no-touch .cd-tab-filter a:hover {
+            color: #f03d6c;
+          }
+          .cd-tab-filter a.selected {
+            background: transparent;
+            color: #f03d6c;
+            /* create border bottom using box-shadow property */
+            box-shadow: inset 0 -2px 0 #f03d6c;
+          }
+          .cd-tab-filter.is-open ul li {
+            display: inline-block;
+          }
+        }
+        @@media only screen and (min-width: 1170px) {
+          .cd-tab-filter {
+            /* tabbed navigation on big devices */
+            width: 100%;
+            float: right;
+            margin: 0;
+            -webkit-transition: width 0.3s;
+            -moz-transition: width 0.3s;
+            transition: width 0.3s;
+          }
+          .cd-tab-filter.filter-is-visible {
+            /* reduce width when filter is visible */
+            width: 80%;
+          }
+        }
+
+        /* --------------------------------
+
+        xgallery
+
+        -------------------------------- */
+        .cd-gallery {
+          padding: 26px 5%;
+          width: 100%;
+        }
+        .cd-gallery li {
+          margin-bottom: 1.6em;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+          display: none;
+        }
+        .cd-gallery li.gap {
+          /* used in combination with text-align: justify to align gallery elements */
+          opacity: 0;
+          height: 0;
+          display: inline-block;
+        }
+        .cd-gallery img {
+          display: block;
+          width: 100%;
+        }
+        .cd-gallery .cd-fail-message {
+          display: none;
+          text-align: center;
+        }
+        @@media only screen and (min-width: 768px) {
+          .cd-gallery {
+            padding: 40px 3%;
+          }
+          .cd-gallery ul {
+            text-align: justify;
+          }
+          .cd-gallery ul:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+          .cd-gallery li {
+            width: 48%;
+            margin-bottom: 2em;
+          }
+        }
+        @@media only screen and (min-width: 1170px) {
+          .cd-gallery {
+            padding: 50px 2%;
+            float: right;
+            -webkit-transition: width 0.3s;
+            -moz-transition: width 0.3s;
+            transition: width 0.3s;
+          }
+          .cd-gallery li {
+            width: 23%;
+          }
+          .cd-gallery.filter-is-visible {
+            /* reduce width when filter is visible */
+            width: 80%;
+          }
+        }
+
+        /* --------------------------------
+
+        xfilter
+
+        -------------------------------- */
+        .cd-filter {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 280px;
+          height: 100%;
+          background: #ffffff;
+          box-shadow: 4px 4px 20px transparent;
+          z-index: 2;
+          /* Force Hardware Acceleration in WebKit */
+          -webkit-transform: translateZ(0);
+          -moz-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          -o-transform: translateZ(0);
+          transform: translateZ(0);
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          -webkit-transform: translateX(-100%);
+          -moz-transform: translateX(-100%);
+          -ms-transform: translateX(-100%);
+          -o-transform: translateX(-100%);
+          transform: translateX(-100%);
+          -webkit-transition: -webkit-transform 0.3s, box-shadow 0.3s;
+          -moz-transition: -moz-transform 0.3s, box-shadow 0.3s;
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cd-filter::before {
+          /* top colored bar */
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 50px;
+          width: 100%;
+          background-color: #444444;
+          z-index: 2;
+        }
+        .cd-filter form {
+          padding: 70px 20px;
+        }
+        .cd-filter .cd-close {
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 50px;
+          line-height: 50px;
+          width: 60px;
+          color: #ffffff;
+            text-align: center;
+          background: #444444;
+          opacity: 0;
+          -webkit-transition: opacity 0.3s;
+          -moz-transition: opacity 0.3s;
+          transition: opacity 0.3s;
+          z-index: 3;
+        }
+        .no-touch .cd-filter .cd-close:hover {
+          background: #666666;
+        }
+        .cd-filter.filter-is-visible {
+          -webkit-transform: translateX(0);
+          -moz-transform: translateX(0);
+          -ms-transform: translateX(0);
+          -o-transform: translateX(0);
+          transform: translateX(0);
+          box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .cd-filter.filter-is-visible .cd-close {
+          opacity: 1;
+        }
+        @@media only screen and (min-width: 1170px) {
+          .cd-filter {
+            width: 20%;
+          }
+          .cd-filter form {
+            padding: 70px 10%;
+          }
+        }
+
+        .cd-filter-trigger {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 50px;
+          line-height: 50px;
+          width: 60px;
+          /* image replacement */
+          overflow: hidden;
+          text-indent: 100%;
+          color: transparent;
+          white-space: nowrap;
+          background: transparent url("https://entrusters.com/templates/yoo_moustache/html/com_entrusters_shop/products/ui-img/cd-icon-filter.svg") no-repeat center center;
+          z-index: 3;
+        }
+        .cd-filter-trigger.filter-is-visible {
+          pointer-events: none;
+        }
+        @@media only screen and (min-width: 1170px) {
+          .cd-filter-trigger {
+            width: auto;
+            left: 2%;
+            text-indent: 0;
+            color: #9a9a9a;
+            text-transform: uppercase;
+                    padding-left: 24px;
+            background-position: left center;
+            -webkit-transition: color 0.3s;
+            -moz-transition: color 0.3s;
+            transition: color 0.3s;
+          }
+          .no-touch .cd-filter-trigger:hover {
+            color: #f03d6c;
+          }
+          .cd-filter-trigger.filter-is-visible, .cd-filter-trigger.filter-is-visible:hover {
+            color: #ffffff;
+          }
+        }
+
+        /* --------------------------------
+
+        xcustom form elements
+
+        -------------------------------- */
+        .cd-filter-block {
+          margin-bottom: 1.6em;
+        }
+        .cd-filter-block h4 {
+          /* filter block title */
+          position: relative;
+          margin-bottom: .2em;
+          padding: 10px 0 10px 20px;
+          color: #9a9a9a;
+          text-transform: uppercase;
+              -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          cursor: pointer;
+        }
+        .no-touch .cd-filter-block h4:hover {
+          color: #f03d6c;
+        }
+        .cd-filter-block h4::before {
+          /* arrow */
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          width: 16px;
+          height: 16px;
+          background: url("https://entrusters.com/templates/yoo_moustache/html/com_entrusters_shop/products/ui-img/cd-icon-arrow.svg") no-repeat center center;
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
+          transform: translateY(-50%);
+          -webkit-transition: -webkit-transform 0.3s;
+          -moz-transition: -moz-transform 0.3s;
+          transition: transform 0.3s;
+        }
+        .cd-filter-block h4.closed::before {
+          -webkit-transform: translateY(-50%) rotate(-90deg);
+          -moz-transform: translateY(-50%) rotate(-90deg);
+          -ms-transform: translateY(-50%) rotate(-90deg);
+          -o-transform: translateY(-50%) rotate(-90deg);
+          transform: translateY(-50%) rotate(-90deg);
+        }
+        .cd-filter-block input, .cd-filter-block select,
+        .cd-filter-block .radio-label::before,
+        .cd-filter-block .checkbox-label::before {
+          /* shared style for input elements */  border-radius: 0;
+          background-color: #ffffff;
+          border: 2px solid #e6e6e6;
+        }
+        .cd-filter-block input[type='search'],
+        .cd-filter-block input[type='text'],
+        .cd-filter-block select {
+          width: 100%;
+          padding: .8em;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          -ms-appearance: none;
+          -o-appearance: none;
+          appearance: none;
+          box-shadow: none;
+        }
+        .cd-filter-block input[type='search']:focus,
+        .cd-filter-block input[type='text']:focus,
+        .cd-filter-block select:focus {
+          outline: none;
+          background-color: #ffffff;
+          border-color: #f03d6c;
+        }
+        .cd-filter-block input[type='search'] {
+          /* custom style for the search element */
+          border-color: transparent;
+          background-color: #e6e6e6;
+          /* prevent jump - ios devices */
+          font-size: 1rem !important;
+        }
+        .cd-filter-block input[type='search']::-webkit-search-cancel-button {
+          display: none;
+        }
+        .cd-filter-block .cd-select {
+          /* select element wrapper */
+          position: relative;
+        }
+        .cd-filter-block .cd-select::after {
+          /* switcher arrow for select element */
+          content: '';
+          position: absolute;
+          z-index: 1;
+          right: 14px;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
+          transform: translateY(-50%);
+          display: block;
+          width: 16px;
+          height: 16px;
+          background: url("https://entrusters.com/templates/yoo_moustache/html/com_entrusters_shop/products/ui-img/cd-icon-arrow.svg") no-repeat center center;
+          pointer-events: none;
+        }
+        .cd-filter-block select {
+          cursor: pointer;
+        }
+        .cd-filter-block select::-ms-expand {
+          display: none;
+        }
+        .cd-filter-block .list li {
+          position: relative;
+          margin-bottom: .8em;
+        }
+        .cd-filter-block .list li:last-of-type {
+          margin-bottom: 0;
+        }
+        .cd-filter-block input[type=radio],
+        .cd-filter-block input[type=checkbox] {
+          /* hide original check and radio buttons */
+          position: absolute;
+          left: 0;
+          top: 0;
+          margin: 0;
+          padding: 0;
+          opacity: 0;
+          z-index: 2;
+        }
+        .cd-filter-block .checkbox-label,
+        .cd-filter-block .radio-label {
+          padding-left: 24px;
+
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+        .cd-filter-block .checkbox-label::before, .cd-filter-block .checkbox-label::after,
+        .cd-filter-block .radio-label::before,
+        .cd-filter-block .radio-label::after {
+          /* custom radio and check boxes */
+          content: '';
+          display: block;
+          position: absolute;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+        .cd-filter-block .checkbox-label::before,
+        .cd-filter-block .radio-label::before {
+          width: 16px;
+          height: 16px;
+          left: 0;
+        }
+        .cd-filter-block .checkbox-label::after,
+        .cd-filter-block .radio-label::after {
+          /* check mark - hidden */
+          display: none;
+        }
+        .cd-filter-block .checkbox-label::after {
+          /* check mark style for check boxes */
+          width: 16px;
+          height: 16px;
+          background: url("https://entrusters.com/templates/yoo_moustache/html/com_entrusters_shop/products/ui-img/cd-icon-check.svg") no-repeat center center;
+        }
+        .cd-filter-block .radio-label::before,
+        .cd-filter-block .radio-label::after {
+          border-radius: 50%;
+        }
+        .cd-filter-block .radio-label::after {
+          /* check mark style for radio buttons */
+          width: 6px;
+          height: 6px;
+          background-color: #ffffff;
+          left: 5px;
+        }
+        .cd-filter-block input[type=radio]:checked + label::before,
+        .cd-filter-block input[type=checkbox]:checked + label::before {
+          border-color: #f03d6c;
+          background-color: #f03d6c;
+        }
+        .cd-filter-block input[type=radio]:checked + label::after,
+        .cd-filter-block input[type=checkbox]:checked + label::after {
+          display: block;
+        }
+
+        @@-moz-document url-prefix() {
+          /* hide custom arrow on Firefox - select element */
+          .cd-filter-block .cd-select::after {
+            display: none;
+          }
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+
+            $('nav li').hover(
+       function () {
+           $('ul', this).stop().slideDown(200);
+       },
+       function () {
+           $('ul', this).stop().slideUp(200);
+       });
+
+            $(".filter").click(function () {
+                var value = $(this).attr('data-filter');
+                if (value == "All") {
+                    $('.Product').show('1000');
+                }
+                else {
+                    $(".Product").not('.' + value).hide('3000');
+                    $('.Product').filter('.' + value).show('3000');
+                }
+            });
+            $("button").click(function () {
+                $("#shopcart").effect("shake", { times: 4 }, 50);
+            });
+        });
+        function openCity(evt, cityName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the link that opened the tab
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top firstnavbar">
+        <div class="container">
+         
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> English <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-cart" role="menu" style="z-index:1030">
+                            <li><a class="text-center" href="">English</a></li>
+                            <li><a class="text-center" href="">Spanish</a></li>
+                            <li><a class="text-center" href="">German</a></li>
+                            <li><a class="text-center" href="">Hindi</a></li>
+                            <li><a class="text-center" href="">Chinese</a></li>
+                        </ul>
+                    </li>
+                    </li>
+                    <li>@Html.ActionLink("Login", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Wishlist", "About", "Home")</li>
+                    <li><a href="#StoreLocator">Store Location</a></li>
+                    <li>@Html.ActionLink("+91 8087958141", "Contact", "Home")</li>
+                </ul>
+                <div class="Search-Container">
+                    <form>
+                        <input type="text" placeholder="Search.." name="Search" />
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar secondnavbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="border:1px solid #aba9a9">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ECommerce", "Index", "Home", new { area = "" }, new { @class = "navbar-brand",style= "color:#ff708a;" })
+            </div>
+            <div class="navbar-collapse collapse ">
+                <nav>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="/">HOME</a></li>
+                            <li>
+                                <a href="/home/about">Baby Girl</a>
+                            </li>
+                            <li>
+                                <a href="#">Baby Boy</a>
+                                <ul>
+                                    <li><a href="#">Category One  <i class="fa fa-play" aria-hidden="true" style="float:right"></i></a></li>
+                                    <li><a href="#">Category Two <i class="fa fa-play" aria-hidden="true" style="float:right"></i></a></li>
+                                    <li><a href="#">Category Three <i class="fa fa-play" aria-hidden="true" style="float:right"></i></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Jeans</a>
+                                <ul>
+                                    <li><a href="#">Slim Fit  <i class="fa fa-play" aria-hidden="true" style="float:right"></i></a></li>
+                                    <li><a href="#">Normal Fit <i class="fa fa-play" aria-hidden="true" style="float:right"></i></a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Shirt</a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                @*<ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Baby Girl", "About", "Home")</li>
+                        <li>@Html.ActionLink("Baby Boy", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Jeans", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Shirt", "Contact", "Home")</li>
+                    </ul>*@
+                @*@Html.Partial("_LoginPartial")*@
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" id="shopcart" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 0 - Items<span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-cart" role="menu">
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item name</span>
+                                            <span>23$</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item name</span>
+                                            <span>23$</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item name</span>
+                                            <span>23$</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item">
+                                    <span class="item-left">
+                                        <img src="http://lorempixel.com/50/50/" alt="" />
+                                        <span class="item-info">
+                                            <span>Item name</span>
+                                            <span>23$</span>
+                                        </span>
+                                    </span>
+                                    <span class="item-right">
+                                        <button class="btn btn-xs btn-danger pull-right">x</button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a class="text-center" href="">View Cart</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="margin-top: 50px;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
