@@ -199,16 +199,23 @@
     <Compile Include="Controllers\CustomerDetailsController.cs" />
     <Compile Include="Controllers\DashbordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductDetailsController.cs" />
+    <Compile Include="Controllers\tbl_UserDetailsController.cs" />
     <Compile Include="DAL\EcommerceDBContect.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Admin\CustomerDetails.cs" />
+    <Compile Include="Models\Admin\ProductDetails.cs" />
+    <Compile Include="Models\DBInteractor.cs" />
+    <Compile Include="Models\EmailHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Admin\tbl_UserDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1999,6 +2006,17 @@
     <Content Include="Views\CustomerDetails\Details.cshtml" />
     <Content Include="Views\CustomerDetails\Edit.cshtml" />
     <Content Include="Views\CustomerDetails\Index.cshtml" />
+    <Content Include="Views\tbl_UserDetails\Create.cshtml" />
+    <Content Include="Views\tbl_UserDetails\Delete.cshtml" />
+    <Content Include="Views\tbl_UserDetails\Details.cshtml" />
+    <Content Include="Views\tbl_UserDetails\Edit.cshtml" />
+    <Content Include="Views\tbl_UserDetails\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\ProductDetails\Create.cshtml" />
+    <Content Include="Views\ProductDetails\Delete.cshtml" />
+    <Content Include="Views\ProductDetails\Details.cshtml" />
+    <Content Include="Views\ProductDetails\Edit.cshtml" />
+    <Content Include="Views\ProductDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,235 @@
+﻿@model Ecommerce.Models.Admin.ProductDetails
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProdreferencetID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProdreferencetID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductSubCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductSubCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductTag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductTag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductSKUCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductSKUCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductMetatagdescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductMetatagdescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductMetatagKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductMetatagKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductMetataAuthor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductMetataAuthor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImageId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductImageId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductStar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductStar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsUpdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsUpdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsertDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsertDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LMDDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LMDDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -4,205 +4,223 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/Dashbord/Index">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Customer Details</li>
+    </ol>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StoreName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StoreID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StoreType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustFName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustLName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CusttTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustAddress1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustAddress2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustCity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustState)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustPostalCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustCountry)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustPhone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustFax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustWebSite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreaditCardNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CardType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CardExpMonth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CardExpYear)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WalletMoney)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsUpdate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InsertDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LMDDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsSubScribe)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustFName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustLName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CusttTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustAddress1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustAddress2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustCity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustPostalCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustCountry)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustPhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustFax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustWebSite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreaditCardNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CardType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CardExpMonth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CardExpYear)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WalletMoney)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDelete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsUpdate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InsertDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LMDDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsSubScribe)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CustID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CustID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CustID })
-        </td>
-    </tr>
-}
-
-</table>
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+          Customer Details
+            @Html.ActionLink("Create New", "Create",null, new { @style="float:right" })
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+            
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.StoreName)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.StoreID)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.StoreType)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.Password)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustName)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustFName)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustLName)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CusttTitle)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustAddress1)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustAddress2)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustCity)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustState)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustPostalCode)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustCountry)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustPhone)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustFax)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustEmail)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CustWebSite)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CreaditCardNumber)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CardType)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CardExpMonth)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.CardExpYear)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.WalletMoney)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.role)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.IsActive)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.IsDelete)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.IsUpdate)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.InsertDate)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.LMDDate)
+                            </th>
+                            <th nowrap>
+                                @Html.DisplayNameFor(model => model.IsSubScribe)
+                            </th>
+                            <th nowrap></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                    {
+                    <tr>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.StoreName)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.StoreID)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.StoreType)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustName)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustFName)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustLName)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CusttTitle)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustAddress1)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustAddress2)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustCity)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustState)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustPostalCode)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustCountry)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustPhone)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustFax)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustEmail)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CustWebSite)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CreaditCardNumber)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CardType)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CardExpMonth)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.CardExpYear)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.WalletMoney)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.role)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.IsDelete)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.IsUpdate)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.InsertDate)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.LMDDate)
+                        </td>
+                         <td nowrap>
+                            @Html.DisplayFor(modelItem => item.IsSubScribe)
+                        </td>
+                         <td nowrap>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CustID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.CustID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CustID })
+                        </td>
+                    </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
