@@ -19,7 +19,7 @@ namespace Ecommerce.Controllers
         // GET: ProductDetails
         public async Task<ActionResult> Index()
         {
-            return View(await db.ProductDetails.ToListAsync());
+            return View(await db.ProductDetails.OrderByDescending(x=>x.InsertDate).ToListAsync());
         }
 
         // GET: ProductDetails/Details/5
@@ -40,6 +40,7 @@ namespace Ecommerce.Controllers
         // GET: ProductDetails/Create
         public ActionResult Create()
         {
+            ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
             return View();
         }
 
@@ -48,13 +49,20 @@ namespace Ecommerce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,StoreID,ProdreferencetID,ProductCode,ProductName,ProductDescription,ProductCategory,ProductSubCategory,ProductSize,ProductColor,ProductBrand,ProductQuantity,ProductTag,ProductSKUCode,ProductMetatagdescription,ProductMetatagKey,ProductMetataAuthor,ProductPrice,CID,VAT,ProductImageId,ProductWeight,ProductStar,IsActive,IsDelete,IsUpdate,InsertDate,LMDDate")] ProductDetails productDetails)
+        public async Task<ActionResult> Create(ProductDetails productDetails)
         {
             if (ModelState.IsValid)
             {
+                productDetails.InsertDate = DateTime.Now;
+                productDetails.LMDDate = DateTime.Now;
+                
                 db.ProductDetails.Add(productDetails);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
             }
 
             return View(productDetails);
@@ -68,6 +76,7 @@ namespace Ecommerce.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ProductDetails productDetails = await db.ProductDetails.FindAsync(id);
+            ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
             if (productDetails == null)
             {
                 return HttpNotFound();
@@ -80,13 +89,18 @@ namespace Ecommerce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProductID,StoreID,ProdreferencetID,ProductCode,ProductName,ProductDescription,ProductCategory,ProductSubCategory,ProductSize,ProductColor,ProductBrand,ProductQuantity,ProductTag,ProductSKUCode,ProductMetatagdescription,ProductMetatagKey,ProductMetataAuthor,ProductPrice,CID,VAT,ProductImageId,ProductWeight,ProductStar,IsActive,IsDelete,IsUpdate,InsertDate,LMDDate")] ProductDetails productDetails)
+        public async Task<ActionResult> Edit(ProductDetails productDetails)
         {
             if (ModelState.IsValid)
             {
+                productDetails.LMDDate = DateTime.Now;
                 db.Entry(productDetails).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
             }
             return View(productDetails);
         }
