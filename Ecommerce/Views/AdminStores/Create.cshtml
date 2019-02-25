@@ -1,0 +1,391 @@
+﻿@model Ecommerce.Models.Admin.AdminStore
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    /* Note: Try to remove the following lines to see the effect of CSS positioning */
+    .affix {
+        top: 20px;
+        z-index: 9999 !important;
+    }
+
+    .tablinks {
+        width: 100%;
+        padding: 10px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .fullwidthactive {
+        width: 100%;
+        padding: 10px;
+        background: #fff;
+        border-radius: 5px 0px 0px 5px;
+        border: 1px solid #c5c5c5;
+        color: #333;
+        text-decoration: none;
+        cursor: pointer;
+        border-right: none;
+        border-left: 2px solid #0081de;
+    }
+
+
+        .fullwidthactive a {
+            color: #333;
+            text-decoration: none !important;
+        }
+
+    .tablinks:hover {
+        border-radius: 5px;
+        background: #d0cccc;
+        color: #333;
+    }
+
+    .tablinks a {
+        color: #025997;
+        text-decoration: none !important;
+    }
+
+    a {
+        text-decoration: none !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/Dashbord/Index">Dashbord</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/Dashbord/Adminstores">Store </a>
+        </li>
+        <li class="breadcrumb-item active">Create</li>
+    </ol>
+
+    <div class="col-md-12">
+        <div class="row">
+            <nav class="col-sm-3">
+                <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205">
+                    <li class="tablinks" onclick="openCity(event, 'Store')" id="defaultOpen">
+                        <a href="#section1"><i class="fas fa-store"></i>  Store Details</a>
+                    </li>
+                    <li class="tablinks" onclick="openCity(event, 'Email')"><a href="#section2"><i class="far fa-envelope-open"></i>  Email Account</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Payment')"><a href="#section3"><i class="fas fa-credit-card"></i>  Payment Method</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Country')"><a href="#section3"><i class="fas fa-globe-americas"></i>  Country</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Language')"><a href="#section3"><i class="fas fa-language"></i>  Language</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Currency')"><a href="#section3"><i class="fas fa-rupee-sign"></i>  Currency</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Tax')"><a href="#section3"><i class="fas fa-percentage"></i>  Tax</a></li>
+                </ul>
+            </nav>
+            <div class="col-sm-9">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal tabcontent" id="Store">
+                        <div style="width:100%">
+                            <div style="display:inline-block;float:left;width:30%;">
+                                <span style="font-size: 28px;font-weight: 600;color: #007ee6;">Store Details</span>
+                            </div>
+                            <div style="display:inline-block;  width:70%;  float: unset;">
+                                <button type="submit" class="form-control" style="background-color:#28a745;border:none;color:#fff;font-weight:bold;width:20%;display:inline-block;float: right;border-radius:0px;cursor:pointer">
+                                    <i class="fa fa-check" aria-hidden="true"></i> Save
+                                </button>
+                            </div>
+
+                        </div>
+
+
+                        <hr />
+                        <div style="height:400px;overflow:auto">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                           
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Store_Name,"Store Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Store_Name,"Store Name", new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Store_Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StoreAddress, "Store Address", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.StoreAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StoreAddress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StoreEmailID,"Store Email ID", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.StoreEmailID, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StoreEmailID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EmailID,"Email ID", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EmailPassword,"Password", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.EmailPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EmailPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EmailPort, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.EmailPort, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EmailPort, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EmailSMTP, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.EmailSMTP, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EmailSMTP, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.IsActive)
+                                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Store_id)
+                            @*<div class="form-group">
+                                @Html.LabelFor(model => model.CreatedOn, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CreatedOn, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CreatedOn, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IsPrimary, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.IsPrimary)
+                                        @Html.ValidationMessageFor(model => model.IsPrimary, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StoreImage, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.StoreImage, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StoreImage, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Facebookpagelink, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Facebookpagelink, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Facebookpagelink, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GooglePlusLink, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.GooglePlusLink, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.GooglePlusLink, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Twitterlink, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Twitterlink, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Twitterlink, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Pinterestlink, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Pinterestlink, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Pinterestlink, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.YoutubeLink, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.YoutubeLink, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.YoutubeLink, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.InstagramLink, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.InstagramLink, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.InstagramLink, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MetaTitle, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.MetaTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MetaDescription, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.MetaDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MetaDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                           
+                        </div>
+                    </div>
+                    <div class="tabcontent" id="Email">
+                        <span style="font-size: 28px;font-weight: 600;color: #007ee6;">
+                            Email
+                        </span>
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong> Save StoreDetails to add Email Account Details for Store.
+                        </div>
+                    </div>
+                    <div class="tabcontent" id="Payment">
+                        <span style="font-size: 28px;font-weight: 600;color: #007ee6;">
+                            Payment Method
+                        </span>
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong> Save StoreDetails to add Payment Method for Store.
+                        </div>
+                    </div>
+                    <div class="tabcontent" id="Country">
+                        <span style="font-size: 28px;font-weight: 600;color: #007ee6;">
+                            Country
+                        </span>
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong> Save StoreDetails to add Country for Store.
+                        </div>
+                    </div>
+                    <div class="tabcontent" id="Language">
+                        <span style="font-size: 28px;font-weight: 600;color: #007ee6;">
+                            Language
+                        </span>
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong>  Save StoreDetails to add Language for Store.
+                        </div>
+                    </div>
+                    <div class="tabcontent" id="Currency">
+                        <span style="font-size: 28px;font-weight: 600;color: #007ee6;">
+                            Currency
+                        </span>
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong>  Save StoreDetails to add Currency for Store.
+                        </div>
+                    </div>
+                    <div class="tabcontent" id="Tax">
+                        <span style="font-size: 28px;font-weight: 600;color: #007ee6;">
+                            Tax
+                        </span>
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong>  Save StoreDetails to Tax Product.
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Style the tab */
+    .tab {
+        float: left;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        width: 30%;
+        height: 300px;
+    }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            /* Create an active/current "tab button" class */
+            .tab button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        float: left;
+        width: 100%;
+    }
+</style>
+<script>
+    function openCity(evt, cityName) {
+
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        debugger
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" fullwidthactive", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " fullwidthactive";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+
+

@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminStoresController.cs" />
     <Compile Include="Controllers\CustomerDetailsController.cs" />
     <Compile Include="Controllers\DashbordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -209,6 +210,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin\AdminStore.cs" />
     <Compile Include="Models\Admin\CustomerDetails.cs" />
     <Compile Include="Models\Admin\ProductDetails.cs" />
     <Compile Include="Models\DBInteractor.cs" />
@@ -1949,6 +1951,8 @@
     <Content Include="Content\AdminContent\vendor\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\AdminContent\vendor\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Content\AdminContent\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\AdminContent\css\bootstrap-toggle.min.css" />
+    <Content Include="Content\AdminContent\js\bootstrap-toggle.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -2018,6 +2022,11 @@
     <Content Include="Views\ProductDetails\Details.cshtml" />
     <Content Include="Views\ProductDetails\Edit.cshtml" />
     <Content Include="Views\ProductDetails\Index.cshtml" />
+    <Content Include="Views\AdminStores\Create.cshtml" />
+    <Content Include="Views\AdminStores\Delete.cshtml" />
+    <Content Include="Views\AdminStores\Details.cshtml" />
+    <Content Include="Views\AdminStores\Edit.cshtml" />
+    <Content Include="Views\AdminStores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

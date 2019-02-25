@@ -91,12 +91,12 @@
                     <a class="dropdown-item" href="/Customerdetails">Manufactures</a>
                     <a class="dropdown-item" href="/productdetails">Manage Products</a>
                     <a class="dropdown-item" href="/productdetails">Product Tags</a>
-                    
+
                     @*<a class="dropdown-item" href="/tbl_userdetails">User Management</a>*@
                     @*<h6 class="dropdown-header">Stock:</h6>
-                    <a class="dropdown-item" href="/productdetails">Products</a>
-                    <a class="dropdown-item" href="/productdetails">Order</a>
-                    <div class="dropdown-divider"></div>*@
+                        <a class="dropdown-item" href="/productdetails">Products</a>
+                        <a class="dropdown-item" href="/productdetails">Order</a>
+                        <div class="dropdown-divider"></div>*@
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -105,7 +105,7 @@
                     <span>Sales</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    
+
                     <a class="dropdown-item" href="/productdetails">Order</a>
                     <div class="dropdown-divider"></div>
                 </div>
@@ -116,6 +116,17 @@
                     <span>Customers</span>
                 </a>
             </li>
+           
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cogs" aria-hidden="true"></i>
+                    <span>Promote</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" href="/AdminStores">Discount</a>
+                    <a class="dropdown-item" href="/Customerdetails">Email Subscriber</a>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
@@ -123,11 +134,28 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
+                <a class="nav-link" href="/AdminStores">
+                    <i class="fas fa-cogs" aria-hidden="true"></i>
+                    <span>Configuration</span>
                 </a>
             </li>
+            @*<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cogs" aria-hidden="true"></i>
+                    <span>Configuration</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header">Settings:</h6>
+                    <a class="dropdown-item" href="/AdminStores">Store</a>
+                    <a class="dropdown-item" href="/Customerdetails">Email Account</a>
+                    <a class="dropdown-item" href="/Customerdetails">Payment Method</a>
+                    <a class="dropdown-item" href="/productdetails">Country</a>
+                    <a class="dropdown-item" href="/productdetails">Language</a>
+                    <a class="dropdown-item" href="/productdetails">Currency</a>
+                    <a class="dropdown-item" href="/productdetails">Tax</a>
+                </div>
+            </li>*@
+
         </ul>
         @RenderBody()
         <!-- /.content-wrapper -->
@@ -155,7 +183,7 @@
             </div>
         </div>
     </div>
-   
+
     <!-- Bootstrap core JavaScript-->
     <script src="~/Content/AdminContent/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/AdminContent/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -170,7 +198,7 @@
     <!-- Demo scripts for this page-->
     <script src="~/Content/AdminContent/js/demo/datatables-demo.js"></script>
     <script src="~/Content/AdminContent/js/demo/chart-area-demo.js"></script>
-   
+
 </body>
 </html>
 

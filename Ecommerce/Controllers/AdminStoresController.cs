@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -12,123 +12,108 @@ using Ecommerce.Models.Admin;
 
 namespace Ecommerce.Controllers
 {
-    public class ProductDetailsController : Controller
+    public class AdminStoresController : Controller
     {
         private EcommerceDBContect db = new EcommerceDBContect();
 
-        // GET: ProductDetails
+        // GET: AdminStores
         public async Task<ActionResult> Index()
         {
-            return View(await db.ProductDetails.OrderByDescending(x=>x.InsertDate).ToListAsync());
+            return View(await db.AdminStores.ToListAsync());
         }
 
-        // GET: ProductDetails/Details/5
+        // GET: AdminStores/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductDetails productDetails = await db.ProductDetails.FindAsync(id);
-            if (productDetails == null)
+            AdminStore adminStore = await db.AdminStores.FindAsync(id);
+            if (adminStore == null)
             {
                 return HttpNotFound();
             }
-            return View(productDetails);
+            return View(adminStore);
         }
 
-        // GET: ProductDetails/Create
+        // GET: AdminStores/Create
         public ActionResult Create()
         {
-            ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
-            ViewBag.StoreID = db.AdminStores.Where(c => c.IsActive == true).ToList();
             return View();
         }
 
-        // POST: ProductDetails/Create
+        // POST: AdminStores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ProductDetails productDetails)
+        public async Task<ActionResult> Create(AdminStore adminStore)
         {
             if (ModelState.IsValid)
             {
-                productDetails.InsertDate = DateTime.Now;
-                productDetails.LMDDate = DateTime.Now;
-                
-                db.ProductDetails.Add(productDetails);
+                adminStore.CreatedOn = DateTime.Now;
+                db.AdminStores.Add(adminStore);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            else
-            {
-                ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
-            }
 
-            return View(productDetails);
+            return View(adminStore);
         }
 
-        // GET: ProductDetails/Edit/5
+        // GET: AdminStores/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductDetails productDetails = await db.ProductDetails.FindAsync(id);
-            ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
-            ViewBag.StoreID = db.AdminStores.Where(c => c.IsActive == true).ToList();
-            if (productDetails == null)
+            AdminStore adminStore = await db.AdminStores.FindAsync(id);
+            if (adminStore == null)
             {
                 return HttpNotFound();
             }
-            return View(productDetails);
+            return View(adminStore);
         }
 
-        // POST: ProductDetails/Edit/5
+        // POST: AdminStores/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ProductDetails productDetails)
+        public async Task<ActionResult> Edit(AdminStore adminStore)
         {
             if (ModelState.IsValid)
             {
-                productDetails.LMDDate = DateTime.Now;
-                db.Entry(productDetails).State = EntityState.Modified;
+                db.Entry(adminStore).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            else
-            {
-                ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
-            }
-            return View(productDetails);
+            return View(adminStore);
         }
 
-        // GET: ProductDetails/Delete/5
+        // GET: AdminStores/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductDetails productDetails = await db.ProductDetails.FindAsync(id);
-            if (productDetails == null)
+            AdminStore adminStore = await db.AdminStores.FindAsync(id);
+            if (adminStore == null)
             {
                 return HttpNotFound();
             }
-            return View(productDetails);
+            return View(adminStore);
         }
 
-        // POST: ProductDetails/Delete/5
+        // POST: AdminStores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ProductDetails productDetails = await db.ProductDetails.FindAsync(id);
-            db.ProductDetails.Remove(productDetails);
+            AdminStore adminStore = await db.AdminStores.FindAsync(id);
+            db.AdminStores.Remove(adminStore);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

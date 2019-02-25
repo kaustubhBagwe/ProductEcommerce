@@ -15,7 +15,7 @@
         z-index: 9999 !important;
     }
 
-    .fullwidth {
+    .tablinks {
         width: 100%;
         padding: 10px;
         cursor: pointer;
@@ -38,18 +38,24 @@
 
         .fullwidthactive a {
             color: #333;
-            text-decoration: none;
+             text-decoration: none !important;
+
         }
 
-    .fullwidth:hover {
+    .tablinks:hover {
         border-radius: 5px;
         background: #d0cccc;
-        color: #fff;
+        color: #333;
     }
 
-    .fullwidth a {
-        color: #333;
-        text-decoration: none;
+    .tablinks a {
+        color: #025997;
+         text-decoration: none !important;
+
+    }
+     a{
+          text-decoration: none !important;
+
     }
 </style>
 <div class="container-fluid">
@@ -67,13 +73,15 @@
         <div class="row">
             <nav class="col-sm-3">
                 <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205">
-                    <li class="active fullwidthactive tablinks" onclick="openCity(event, 'ProductDetails')" id="defaultOpen"><a href="#section1"><i class="fa fa-info-circle" aria-hidden="true"></i> Product Details</a></li>
-                    <li class="fullwidth tablinks"><a href="#section2" onclick="openCity(event, 'Price')"><i class="fas fa-rupee-sign"></i> Price</a></li>
-                    <li class="fullwidth tablinks"><a href="#section3" onclick="openCity(event, 'Pictures')"><i class="fa fa-file-image" aria-hidden="true"></i> Pictures</a></li>
-                    <li class="fullwidth tablinks"><a href="#section3" onclick="openCity(event, 'Category')"><i class="fas fa-code-branch"></i> Category</a></li>
-                    <li class="fullwidth tablinks"><a href="#section3" onclick="openCity(event, 'Manufacture')"><i class="fa fa-truck" aria-hidden="true"></i> Manufacture</a></li>
-                    <li class="fullwidth tablinks"><a href="#section3" onclick="openCity(event, 'SEO')"><i class="fab fa-google"></i> SEO</a></li>
-                    <li class="fullwidth tablinks"><a href="#section3" onclick="openCity(event, 'Publish')"><i class="fa fa-eye-slash" aria-hidden="true"></i> Publish</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'ProductDetails')" id="defaultOpen">
+                        <a href="#section1"><i class="fa fa-info-circle" aria-hidden="true"></i> Product Details</a>
+                    </li>
+                    <li class="tablinks" onclick="openCity(event, 'Price')"><a href="#section2"><i class="fas fa-rupee-sign"></i> Price</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Pictures')"><a href="#section3"><i class="fa fa-file-image" aria-hidden="true"></i> Pictures</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Category')"><a href="#section3"><i class="fas fa-code-branch"></i> Category</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Manufacture')"><a href="#section3"><i class="fa fa-truck" aria-hidden="true"></i> Manufacture</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'SEO')"><a href="#section3"><i class="fab fa-google"></i> SEO</a></li>
+                    <li class="tablinks" onclick="openCity(event, 'Publish')"><a href="#section3"><i class="fa fa-eye-slash" aria-hidden="true"></i> Publish</a></li>
                 </ul>
             </nav>
             <div class="col-sm-9">
@@ -137,7 +145,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.StoreID, htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.StoreID, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.DropDownListFor(x => Model.StoreID, new SelectList(ViewBag.StoreID, "Store_id", "Store_Name"), htmlAttributes: new { @class = "form-control", id = "StoreID" })
                                     @Html.ValidationMessageFor(model => model.StoreID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -535,7 +543,7 @@
     });
 
     function openCity(evt, cityName) {
-        debugger
+       
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
