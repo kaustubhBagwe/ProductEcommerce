@@ -91,7 +91,7 @@ namespace Ecommerce.Models.Admin
         public string URLAlias { get; set; }
 
         [ForeignKey("ProductSize")]
-        public SizeMaster _size_RK { get; set; }
+        public Size _size_RK { get; set; }
     }
 
 }

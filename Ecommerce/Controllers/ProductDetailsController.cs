@@ -40,7 +40,7 @@ namespace Ecommerce.Controllers
         // GET: ProductDetails/Create
         public ActionResult Create()
         {
-            ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
+            ViewBag._size_RK = db.Sizes.Where(c => c.IsActive == true).ToList();
             ViewBag.StoreID = db.AdminStores.Where(c => c.IsActive == true).ToList();
             return View();
         }
@@ -63,7 +63,7 @@ namespace Ecommerce.Controllers
             }
             else
             {
-                ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
+                ViewBag._size_RK = db.Sizes.Where(c => c.IsActive == true).ToList();
             }
 
             return View(productDetails);
@@ -77,7 +77,7 @@ namespace Ecommerce.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ProductDetails productDetails = await db.ProductDetails.FindAsync(id);
-            ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
+            ViewBag._size_RK = db.Sizes.Where(c => c.IsActive == true).ToList();
             ViewBag.StoreID = db.AdminStores.Where(c => c.IsActive == true).ToList();
             if (productDetails == null)
             {
@@ -102,7 +102,7 @@ namespace Ecommerce.Controllers
             }
             else
             {
-                ViewBag._size_RK = db.SizeMaster.Where(c => c.IsActive == true).ToList();
+                ViewBag._size_RK = db.Sizes.Where(c => c.IsActive == true).ToList();
             }
             return View(productDetails);
         }

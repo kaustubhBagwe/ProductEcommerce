@@ -1,0 +1,41 @@
+﻿@model Ecommerce.Models.Order
+
+@{
+    ViewBag.Title = "OrderTrack";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 form-group jumbotron">
+                <h2>Order Track</h2>
+                <strong>Please enter Order ID to view the tracking information.</strong> <br />
+                <p>
+                    @Html.TextBoxFor(m => m.OrderID, new { @class = "form-control col-md-6 input-sm", @placeholder = "Enter Order ID to Track details.", @style = "margin-top: 8px;font-family:Tahoma;font-size:medium; -webkit-border-radius: 0px;border:2px solid ;height:40px" })
+                </p>
+                <br />
+                <p>
+                    <input type="submit" value="Track" class="btn btn-success" style="margin-top: 8px;font-family:Tahoma;font-size:medium; -webkit-border-radius: 0px;border:2px solid #0094ff;height:40px;color:#3d3c3c;color:#fff;background-color:#0094ff" />
+                </p>
+                <br />
+                <p>
+                    @if (ViewBag.Status == "Order Placed")
+                    {
+                        <img src="http://livingstud.com/images/OrderPlaced.jpg" class="img-responsive" />
+                    }
+                    @if (ViewBag.Status == "Order InProgress")
+                    { <img src="http://livingstud.com/images/InProgress.jpg" class="img-responsive" /> }
+                    @if (ViewBag.Status == "Order shipped")
+                    { <img src="http://livingstud.com/images/Shipped.jpg" class="img-responsive" /> }
+                    @if (ViewBag.Status == "Order Delivered")
+                    { <img src="http://livingstud.com/images/Delivered.jpg" class="img-responsive" /> }
+                    @if (ViewBag.Status == "Invalid Order ID")
+                    { <img src="http://livingstud.com/images/Invalid.jpg" class="img-responsive" /> }
+
+                </p>
+            </div>
+        </div>
+    </div>
+}

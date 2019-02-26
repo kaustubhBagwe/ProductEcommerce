@@ -1,0 +1,147 @@
+﻿@model Ecommerce.Models.Discount
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Discount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountedProductCategoryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountedProductCategoryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountProductID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountProductID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountVendorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountVendorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountAmountType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountAmountType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsertDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsertDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsUpdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsUpdate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DicountID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

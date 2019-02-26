@@ -1,0 +1,471 @@
+﻿@model Ecommerce.Models.Order
+@using Ecommerce.DAL;
+@using Ecommerce.Models;
+@{
+    
+    ViewBag.Title = "Details";
+    EcommerceDBContect db = new EcommerceDBContect();
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    
+}
+
+
+<p><strong>Order NO Details : @Html.DisplayFor(model => model.OrderID)</strong></p>
+<div>
+
+    <hr />
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <table class="table table-hover">
+                <tr>
+                    <td>
+                        <strong>Customer ID</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.CustomerID)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Customer Name</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.CompanyName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>First Name</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.ContactFName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Last Name</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.ContactLName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Contact Title</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.ContactTitle)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Address1</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Address1)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Address2</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Address2)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Order City</strong>
+                    </td>
+
+                    <td>
+                        @{
+                            var cityName = db.City.Find(Model.Order_City).CityName;
+                        <span>@cityName</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Order State</strong>
+                    </td>
+
+                    <td>
+                        @{
+                            var StateName = db.State.Find(Model.Order_State).StateName;
+                        <span>@StateName</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>PostalCode</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.PostalCode)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Country</strong>
+                    </td>
+
+                    <td>
+                        <span>India</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Phone</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Fax</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Fax)
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-hover">
+                <tr>
+                    <td>
+                        <strong>Email</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>WebSite</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.WebSite)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Payment Methods</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.PaymentMethods)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Tranaction ID</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.TranactionID)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>OrderDate</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.OrderDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Required Date</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.RequiredDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Shiped Date</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.ShipedDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>VAT</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.VAT)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Transact Status</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.TransactStatus)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Error Msg</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.ErrMsg)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Fulfilled</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Fulfilled)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Paid Aount</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.PaidAount)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Payment Date</strong>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.PaymentDate)
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <hr />
+    <h4>Items Ordered</h4>
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <table class="table table-hover table-bordered table-responsive ">
+                @{
+                    <thead>
+                        <tr>
+                            <th>
+                                Order ItemsID
+                            </th>
+                            <th>
+                                Product ID
+                            </th>
+
+                            <th>
+                                Product Code
+                            </th>
+                            <th>
+                                Product Name
+                            </th>
+                            <th>
+                                Product Category
+                            </th>
+                            <th>
+                                Product SubCategory
+                            </th>
+                            <th>
+                                Product Size
+                            </th>
+                            <th>
+                                Product Color
+                            </th>
+                            <th>
+                                Product Quantity
+                            </th>
+                            <th>
+                                Product Price
+                            </th>
+                            <th>
+                                VAT
+                            </th>
+                            <th>
+                                Product Weight
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var Newitem in ViewBag.OrderItems)
+                        {
+                        <tr>
+                            <td>
+                                @Newitem.OrderItemsID
+                            </td>
+                            <td>
+                                @Newitem.ProductID
+                            </td>
+
+                            <td>
+                                @Newitem.ProductCode
+                            </td>
+                            <td>
+                                @Newitem.ProductName
+                            </td>
+                            <td>
+                                @{
+                            var ProductCategory = db.Category.Find(Convert.ToInt32(Newitem.ProductCategory)).CategoryName;
+                                    <span>@ProductCategory</span>
+                                }
+                                @*@Newitem.ProductCategory*@
+                            </td>
+                            <td>
+                                @{
+                                    var ProductSubCategory = db.SubCategories.Find(Convert.ToInt32(Newitem.ProductSubCategory)).SubCategoryName;
+                                        <span>@ProductSubCategory</span>
+                                            }
+                            </td>
+                            <td>
+                                @{
+                                    string[] ProductSizestr = Newitem.ProductSize.ToString().Split(',');
+                                    for (int i = 0; i < ProductSizestr.Count(); i++)
+                                    {
+                                        if (ProductSizestr[0] != "") { 
+                                        var ProductSize = db.Sizes.Find(Convert.ToInt32(ProductSizestr[i])).SizeName;
+                                        <span>@ProductSize</span>
+                                }
+                                    }
+
+                                }
+
+                            </td>
+                            <td>
+                                @{
+                                    var ProductColor = db.Colors.Find(Convert.ToInt32(Newitem.ProductColor)).ColorName;
+                                        <span>@ProductColor</span>
+                                            }
+                            </td>
+                            <td>
+                                @Newitem.ProductQuantity
+                            </td>
+                            <td>
+                                @Newitem.ProductPrice .Rs
+                            </td>
+                            <td>
+                                @Newitem.VAT    .Rs
+                            </td>
+                            <td>
+                                @Newitem.ProductWeight
+                            </td>
+                        </tr>
+
+                        }
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <p>
+        <strong>ORDER STATUS</strong>
+    </p>
+    <p>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <select class="form-control" id="drpStatus">
+                    <option value="">-SELECT-</option>
+                    <option value="Order Placed">Order Placed</option>
+                    <option value="Order InProgress">Order InProgress</option>
+                    <option value="Order shipped">Order shipped</option>
+                    <option value="Order Delivered">Order Delivered</option>
+                    <option value="Order Cancel">Order Cancel</option>
+
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="button" id="btnStatusUpdate">
+                    <span class="glyphicon glyphicon-ok-sign"></span>
+                </button>
+            </div>
+            <div class="col-md-4">
+                <span id="lbOrderStatus"></span>
+            </div>
+        </div>
+    </p>
+</div>
+<br />
+<p>
+    <br />
+    @{
+        List<OrderLog> ol = new List<OrderLog>();
+        int oid=Model.OrderID;
+        ol = db.OrderLogs.Where(o => o.OID == oid).OrderByDescending(x=>x.OID).ToList();
+        <h4>Order History </h4>
+        <hr />
+    <table class="table table-hover table-bordered table-responsive ">
+        <tr>
+            <th>Sr No</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Owner</th>
+        </tr>
+        @{
+            int j = 0;
+            for (int i = 0; i < ol.Count; i++)
+            {
+                j++;
+                <tr>
+                    <td>@j</td>
+                    <td>@ol[i].Status</td>
+                    <td>@ol[i].InsertDate</td>
+                    <td>@ol[i].Owner</td>
+                </tr>
+
+            }
+        }
+    </table>
+}
+</p>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<script>
+    $(document).ready(function () {
+        $('#btnStatusUpdate').click(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Orders/OrderStatusUpdate/',
+                data: { 'OrderID': '@Model.OrderID', 'Status': $('#drpStatus').val() },
+                success: function (item) {
+                    debugger
+                    $('#lbOrderStatus').html(item);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        });
+    });
+</script>

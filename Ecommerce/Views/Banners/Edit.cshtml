@@ -1,0 +1,108 @@
+﻿@model Ecommerce.Models.Banner
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Banner</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.BannerId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.BannerImgePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BannerImgePath, new { htmlAttributes = new { id = "BannerImgePath1", @class = "form-control", type = "file" } })
+                @Html.ValidationMessageFor(model => model.BannerImgePath, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.BannerImgePath, new { htmlAttributes = new { @class = "form-control", } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.BannerImgePath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 ">
+                <input type="button" id="btnUpload" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+        <div class="form-group">
+           
+            <div class="col-md-10 well">
+                <img src="@Model.BannerImgePath" class="img-responsive" style="max-height:350px" />
+            </div>
+        </div>
+        
+    </div>
+    <p>
+        <span id="msgimg"></span>
+    </p>
+    <div id="imgshow" class="col-md-8">
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script>
+    $(document).ready(function () {
+        $("#BannerImgePath").hide();
+        $('#btnUpload').on('click', function (e) {
+            var files = $("#BannerImgePath1").get(0).files;
+            debugger
+            var ProdID = $('#BannerId').val() //uncomment this to make sure the ajax URL works
+           
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    if (files.length > 0) {
+                        for (var x = 0; x < files.length; x++) {
+                            data.append("file" + x, files[x]);
+                        }
+                    } else { data.append("file" + x, ""); }
+                    data.append("id", ProdID);
+                    if ($('#IsActive').is(':checked')) {
+                        data.append("isActive", "true");
+                    } else { data.append("isActive", "false"); }
+                    data.append("img", $("#BannerImgePath").val());
+                    $.ajax({
+                        type: "POST",
+                        url: '/Banners/UploadFileUpdate/',
+                        data: { 'id': ProdID },
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function (result) {
+                            debugger
+                            $('#msgimg').text(result)
+                            var div = document.getElementById('imgshow');
+                            var img = document.createElement('img');
+                            img.height = 100;
+                            img.src = 'http://livingstud.com/images/' + $("#ProductImage").prop("files")[0].name;
+                            div.appendChild(img);
+                            $('#imgshow img').css('padding', '10px')
+                        },
+                        error: function (xhr, status, p3, p4) {
+                          
+                            var err = "Error " + " " + status + " " + p3 + " " + p4;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).Message;
+                            console.log(err);
+                            $('#msgimg').text(err)
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+            
+        });
+    });
+</script>

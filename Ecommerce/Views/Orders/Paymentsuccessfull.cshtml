@@ -1,0 +1,144 @@
+﻿@model Ecommerce.Models.Order
+
+@{
+    ViewBag.Title = "Payment successfull";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Order Details </h2>
+
+<div id="myinvoice">
+    <div class="container">
+        <div class="row">
+            <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+                <div class="row">
+                    <center><h1>Receipt</h1></center>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <address>
+                            <h4>LivingStud.com</h4>
+
+                           Email : LivingStud@gmail.com
+                            <br>
+                           
+                            <abbr title="Phone">P:</abbr> +918087958141
+                        </address>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                        <p>
+                          
+                                <em>order Date: @Html.DisplayFor(model => model.InsertDate)</em>
+                           
+
+                        </p>
+                        <p>
+                            <em>Receipt #: @Html.DisplayFor(model => model.OrderID)</em>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text-center">
+
+                    </div>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var items in ViewBag.Items)
+                            {
+                                <tr>
+                                    <td class="col-md-9"><em>@items.ProductName</em></td>
+                                    <td class="col-md-1" style="text-align: center"> @items.ProductQuantity </td>
+                                    <td class="col-md-1 text-center">₹@items.ProductPrice</td>
+                                    <td class="col-md-1 text-center">₹@items.ProductPrice</td>
+                                </tr>
+                            }
+                            
+
+                            
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>₹@Html.DisplayFor(model => model.PaymentAmount)</strong></h4></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="row">
+                    <div class="text-center">
+                        <h1>Delivery Details</h1>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Contact Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-md-9"><em>@Html.DisplayFor(model => model.ContactFName)</em>
+                                    <em>@Html.DisplayFor(model => model.ContactLName)</em><em>(@Html.DisplayFor(model => model.Phone))</em>
+                                <em>, @Html.DisplayFor(model => model.Email)</em>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Address</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-md-9">
+                                    <em>
+                                      @Html.DisplayFor(model => model.Address1)
+                                        <br />
+                                        @Html.DisplayFor(model => model.Address2)
+                                    </em>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<input type="button" value="Print Invoice" onclick="javascript: printDiv('myinvoice')" />
+<script language="javascript" type="text/javascript">
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML =
+              "<html><head><title></title></head><body>" +
+              divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+
+        }
+</script>

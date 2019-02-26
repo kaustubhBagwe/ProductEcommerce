@@ -1,0 +1,304 @@
+﻿@model Ecommerce.Models.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProducID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProducID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ColorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ColorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SizeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SizeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactFName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactFName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactLName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactLName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order_City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order_City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order_State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order_State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebSite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebSite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMethods)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMethods)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TranactionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TranactionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequiredDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransactStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ErrMsg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ErrMsg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fulfilled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fulfilled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidAount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaidAount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsUpdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsUpdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsertDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsertDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LMDDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LMDDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

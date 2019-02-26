@@ -1,0 +1,468 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using Ecommerce.DAL;
+@using Ecommerce.Models;
+@model IPagedList<Ecommerce.Models.Product>
+@{
+    ViewBag.Title = "Search";
+    EcommerceDBContect db = new EcommerceDBContect();
+}
+
+<br />
+<h3>Search Products</h3>
+<hr />
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-8">
+            <div class="col-md-8">
+                <input type="text" class="form-control" id="txtSearch" style="margin-top: 8px;font-family:Tahoma;font-size:medium; -webkit-border-radius: 0px;" placeholder="Search Products">
+            </div>
+            <div class="col-md-2">
+                <input type="button" id="btnsearch" value="Search" class="form-control glyphicon glyphicon-search" style="margin-top: 8px;font-family:Tahoma;font-size:medium; -webkit-border-radius: 0px;border:2px solid #1c879f;color:#fff;background-color:#1c879f;">
+            </div>
+        </div>
+    </div>
+
+</div>
+<div style="clear:both">
+    <hr />
+
+    <div class="col-md-9 product-model-sec">
+        <p>
+            <span>Search Result :</span>
+        </p>
+        <br />
+        @{ var i = 0;
+         foreach (var item in Model)
+         {
+        <div class="product-grid" id="searchresult">
+            <div class=" gallery-grid ">
+                @{
+             var seolink = item.ProductName;
+             if (seolink != "") { seolink = seolink.Replace(" ", "-"); }
+             
+
+                    <a href="http://livingstud.com/Products/Details/@item.ProductCode/@seolink">
+                        @{
+             var src = db.ProductImage.Where(x => x.IProductID == item.ProductID).ToList();
+                <img src="@src[0].ImagePath" class="img-responsive" alt="" />
+                        }
+
+                        <div class="gallery-info">
+                            <p><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> view</p>
+
+                            <a class="shop" href="http://livingstud.com/Products/Details/@item.ProductCode/@seolink">SHOP NOW</a>
+
+                            <div class="clearfix"> </div>
+                        </div>
+                    </a>
+                }
+                <div class="galy-info">
+                    <p>@Html.DisplayFor(modelItem => item.ProductName)</p>
+                    <div class="galry">
+                        <div class="prices">
+                            @{
+             if (item.IsDiscounted == true)
+             {
+                                <h5 class="item_price">₹ <strike> @Html.DisplayFor(modelItem => item.ProductPrice)</strike> @Html.DisplayFor(modelItem => item.DiscountAmount) </h5>
+             }
+             else
+             {
+                                <h5 class="item_price">₹@Html.DisplayFor(modelItem => item.ProductPrice)</h5>
+             }
+                            }
+                        </div>
+                        <div class="rating">
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+             if (i == 2)
+             {
+        <div style="clear:both"></div>
+             }
+             if (i == 5)
+             {
+        <div style="clear:both"></div>
+             }
+             i++;
+         }
+        <div style="clear:both"></div>
+        @Html.PagedListPager(Model, Page => Url.Action("Search", "Home", new { Page }))
+        <div>
+            @if (i == 0)
+                {
+                <hr />
+                <center>
+                    <p>
+                        <h2> No Products Found.</h2>
+                    </p>
+                </center>
+                }
+        </div>
+        }
+    </div>
+    <div class="col-md-3 rsidebar span_1_of_left">
+        <section class="sky-form">
+            <div class="product_right">
+
+                <p>
+                    <div class="panel-group">
+                        <div class="treemenu">
+                            @{
+                                List<Category> litcat = db.Category.ToList();
+                                for (int k = 0; k < litcat.Count; k++)
+                                {
+                                    
+                                        <div level="0"><a href="http://livingstud.com/Category/type/@litcat[k].CategoryName"> <span class="lbl">@litcat[k].CategoryName</span> </a></div>
+                                   
+                                    int catid = litcat[k].ID;
+                                    List<SubCategory>
+                                        subcat = db.SubCategories.Where(x => x.MainCategoryId == catid).ToList();
+                                    for (int a = 0; a < subcat.Count; a++)
+                                    {
+                                        
+                                            <div level="1"><a href="http://livingstud.com/Category/type/@subcat[a].SubCategoryName"> <span class="lbl">@subcat[a].SubCategoryName </span> </a></div>
+                                       
+                                    }
+                                    for (int a = 0; a < subcat.Count; a++)
+                                    {
+                                        int subid = subcat[a].SubCategoryID;
+                                        List<SubsubCategory>
+                                            subsubcat = db.SubsubCategories.Where(x => x.SubCategoryId == subid).ToList();
+                                        for (int b = 0; b < subsubcat.Count; b++)
+                                        {
+                                            
+                                                <div level="2"><a href="http://livingstud.com/Category/type/@subsubcat[b].SubsubCategoryName"> <span class="lbl">@subsubcat[b].SubsubCategoryName </span></a></div>
+                                            
+                                        }
+                                    }
+
+                                }
+                            }
+                        </div>
+
+                    </div>
+                </p>
+            </div>
+        </section>
+    </div>
+    <div style="clear:both"></div>
+
+
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        var cate = 0;
+        $("#ProductCategory").prepend("<option value='null' selected='selected'>Select Category</option>");
+        $("#ProductSizedrop").prepend("<option value='null' selected='selected'>Select Size</option>");
+        $("#ProductColor").prepend("<option value='null' selected='selected'>Select Color</option>");
+        var s = window.location.href;
+        var qString = location.search;
+        var d = s.split('?');
+        if (qString.indexOf('catid') != -1) {
+            debugger
+            var data = qString.substring(qString.indexOf('=') + 1, qString.length);
+            var cid = data.split('&')
+            $('#ProductCategory option[value=' + cid[0] + ']').attr('selected', 'selected');
+            //sub(cid[0]);
+        }
+        if (qString.indexOf('color') != -1) {
+            var data1 = qString.substring(qString.indexOf('=') + 1, qString.length);
+            var cid1 = data.split('&')
+            var color1 = cid1[1].split('=')
+
+            $('#ProductColor option[value=' + color1[1] + ']').attr('selected', 'selected');
+        }
+        if (qString.indexOf('size') != -1) {
+            var data2 = qString.substring(qString.indexOf('=') + 1, qString.length);
+            var cid2 = data.split('&')
+            var color2 = cid2[2].split('=')
+            $('#ProductSizedrop option[value=' + color2[1] + ']').attr('selected', 'selected');
+        }
+        if (qString.indexOf('sub') != -1) {
+            var data = qString.substring(qString.indexOf('=') + 1, qString.length);
+            var cid = data.split('&')
+            var color3 = cid[3].split('=')
+            $('#ProductSubCategory option[value=' + color3[1] + ']').attr('selected', 'selected');
+        }
+        if (qString.indexOf('q') != -1) {
+            var data = qString.substring(qString.indexOf('=') + 1, qString.length);
+            $("#txtSearch").val(data);
+        }
+        function sub(elm) {
+            debugger
+            var cid11 = elm;
+            $.ajax({
+                type: 'POST',
+                url: '/Products/SubCategoryList/',
+                data: { 'sid': cid11 },
+                success: function (item) {
+                    debugger
+                    var str = "<option>Select Sub Category</option>";
+                    $('#ProductSubCategory').empty();
+                    for (var i = 0; i < item.length; i++) {
+
+                        str += '<option value=' + $(item)[i].ID + '>' + $(item)[i].Text + '</option>';
+
+                    }
+                    $('#ProductSubCategory').html(str);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+        $("#btnsearch").click(function () {
+            var QueryVal = $("#txtSearch").val();
+            window.location.replace("http://livingstud.com/Home/search?q=" + QueryVal + "");
+        });
+
+        $('#btnfiltersearch').click(function () {
+            $("#searchresult").remove();
+
+            var cat = $('#ProductCategory').val();
+            var color = $('#ProductColor').val();
+            var size = $('#ProductSizedrop').val();
+            var sub = $('#ProductSubCategory').val();
+            window.location.replace("http://livingstud.com/Home/search?catid=" + cat + "&color=" + color + "&size=" + size + "&sub=" + sub + "");
+        });
+        $("#ProductCategory").change(function () {
+            debugger
+            var Stateid = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Products/SubCategoryList/',
+                data: { 'sid': Stateid },
+                success: function (item) {
+                    debugger
+                    var str = "<option>Select Sub Category</option>";
+                    $('#ProductSubCategory').empty();
+                    for (var i = 0; i < item.length; i++) {
+
+                        str += '<option value=' + $(item)[i].ID + '>' + $(item)[i].Text + '</option>';
+
+                    }
+                    $('#ProductSubCategory').html(str);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+        $('#ranglesliderdiv :input').css('width', '50%')
+    });
+</script>
+<style>
+    .button {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        display: inline-block;
+        height: 20px;
+        width: 25px;
+        cursor: pointer;
+    }
+
+    .inc {
+        color: green;
+        border: 1px solid green;
+        height: 29px;
+    }
+
+    .dec {
+        color: red;
+        border: 1px solid red;
+        height: 29px;
+    }
+</style>
+<style>
+    @@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+    .treemenu [level] {
+        transition: max-height 0.3s ease-out;
+        overflow: hidden;
+    }
+
+        .treemenu [level].closed {
+            max-height: 0;
+        }
+
+        .treemenu [level].opened {
+            max-height: 50px;
+        }
+
+    .treemenu [level="1"] .lbl {
+        padding-left: 50px;
+    }
+
+    .treemenu [level="2"] .lbl {
+        padding-left: 100px;
+    }
+
+    /* basic non-functional styling passed this poing */
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+
+
+    .treemenu {
+        width: 218px;
+        margin: auto;
+    }
+
+        .treemenu > [level] {
+            background-color: #555;
+            cursor: pointer;
+        }
+
+            .treemenu > [level].opened {
+                margin: 1px;
+            }
+
+            .treemenu > [level]:hover {
+                background-color: #c5c5c5;
+                color: #555;
+            }
+
+        .treemenu .lbl {
+            color: white;
+            padding: 15px;
+            display: inline-block;
+        }
+
+    .title {
+        text-align: center;
+        font-size: 30px;
+        margin: 10px;
+        color: white;
+    }
+</style>
+<script>
+    window.log = function(text){
+        console.log(text);
+        //$(".console").prepend(text + "<br/>");
+    }
+
+class TreeMenu {
+
+    constructor($container){
+        this.$container = $container;
+        $container.find("[level]").click(this.levelClickHandler.bind(this));
+        var id = 0;
+        $container.find("[level]").each(function(index, item){
+            let $item = $(item);
+            $item.attr("data-treemenu-id", ++id);
+            this.setOpen($item, false);
+            if(parseInt($item.attr("level")) > 0) {
+                this.hideItem($item);
+            } else {
+                this.showItem($item);
+            }
+        }.bind(this))
+    }
+
+    levelClickHandler(evt){
+        var $el = $(evt.currentTarget);
+
+        if(this.isOpen($el)){
+            this.closeItem($el);
+        } else {
+            this.openItem($el);
+        }
+
+    }
+
+    getElementTreeMenuId($el){
+        return $el.attr("data-treemenu-id");
+    }
+
+    getElementLevel($el){
+        return parseInt($el.attr("level"));
+    }
+
+    isOpen($el){
+        return $el.attr("data-treemenu-open") === "1";
+    }
+
+    setOpen($el, to){
+        log("set open: "+ to);
+        $el.attr("data-treemenu-open", to ? "1" : "0");
+    }
+
+    getGroup($el){
+        log("get group");
+        //the group is every element that has a higher level than this one
+        var firstElementLevel = this.getElementLevel($el);
+        var group = [];
+
+        this.$container.find("[level]").each(function(index, item){
+            let $item = $(item);
+
+            if(!group.length) {
+                //first item has not been passed in the loop
+                if(this.getElementTreeMenuId($el) == this.getElementTreeMenuId($item)) {
+                    //the current item is the parent of the group
+                    group.push($item);
+                }
+                //stop this iteration of the loop
+                return true;
+            }
+            //
+            //if the level of the item equals or is lower then the initial level,
+            // we have reached the end of the group
+            let level = parseInt($item.attr("level"));
+            if(level <= firstElementLevel) return false;
+            if(level ==firstElementLevel+1) group.push($item);
+        }.bind(this));
+        return group;
+    }
+
+    closeItem($el){
+        this.setOpen($el, false);
+        this.getGroup($el).forEach(function($item, index){
+            if(!index) return true;
+            this.hideItem($item);
+
+            //also close its children
+            this.closeItem($item);
+        }.bind(this));
+    }
+
+    openItem($el){
+        this.setOpen($el, true);
+        this.getGroup($el).forEach(function($item, index){
+            if(!index) return true;
+            this.showItem($item);
+        }.bind(this));
+    }
+
+    showItem($el) {
+        $el.removeClass("closed");
+        $el.addClass("opened");
+    }
+
+    hideItem($el){
+        $el.removeClass('opened');
+        $el.addClass("closed");
+    }
+}
+
+    var menu = new TreeMenu($(".treemenu"));
+
+</script>

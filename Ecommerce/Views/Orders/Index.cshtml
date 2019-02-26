@@ -1,0 +1,132 @@
+﻿@using Ecommerce.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@using Ecommerce.DAL;
+@model IPagedList<Ecommerce.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    EcommerceDBContect db = new EcommerceDBContect();
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Order Details</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table" style="font-size: 12px;">
+    <tr>
+        <th>
+            <span>O ID</span>
+        </th>
+        <th>
+            <span>CustID</span>
+        </th>
+
+
+        <th>
+            <span>Customer </span>
+        </th>
+
+        <th>
+            <span>Address</span>
+        </th>
+
+        <th>
+            <span>City</span>
+        </th>
+        <th>
+            <span>State</span>
+        </th>
+        <th>
+            <span>Pin Code</span>
+        </th>
+
+        <th>
+            <span>Phone</span>
+        </th>
+        <th style="background-color:#ff6a00">
+            <span>Status</span>
+        </th>
+
+        <th>
+            <span>Order Date</span>
+        </th>
+        <th>
+            <span>Required Date</span>
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Address1)
+            </td>
+
+            <td>
+                @{
+        var cityName = db.City.Find(item.Order_City).CityName;
+        <span>@cityName</span>
+                }
+                @*@Html.DisplayFor(modelItem => item.Order_City)*@
+            </td>
+            <td>
+                @{
+        var StateName = db.State.Find(item.Order_State).StateName;
+        <span>@StateName</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td style="color:#ff6a00">
+                @Html.DisplayFor(modelItem => item.TransactStatus)
+            </td>
+
+            <td>
+
+                @{
+        var OrderDate = item.OrderDate.ToShortDateString();
+        <span>@OrderDate</span>
+                }
+                @*@Html.DisplayFor(modelItem => item.OrderDate.ToShortDateString())*@
+            </td>
+            <td>
+                @{
+        var RequiredDate = item.RequiredDate.ToShortDateString();
+        <span>@RequiredDate</span>
+                }
+            </td>
+
+
+            <td style="color:cadetblue;font-weight:bold">
+                @*  @Html.ActionLink("Edit", "Edit", new { id=item.OrderID }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.OrderID })
+                @*  @Html.ActionLink("Delete", "Delete", new { id=item.OrderID })*@
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))

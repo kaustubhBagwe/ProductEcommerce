@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Ecommerce.Models.ProductReviews>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewMsg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProducctID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Custid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StarCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsUpdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InsertDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LMDDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewMsg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProducctID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Custid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StarCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDelete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsUpdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsertDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LMDDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Rid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Rid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Rid })
+        </td>
+    </tr>
+}
+
+</table>

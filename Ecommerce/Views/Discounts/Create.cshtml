@@ -1,0 +1,169 @@
+﻿@model Ecommerce.Models.Discount
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Discounts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Create Discount</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-2">
+Discount Code            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.DiscountCode, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Discount Code" } })
+                @Html.ValidationMessageFor(model => model.DiscountCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                Title
+            </div>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.DiscountTitle, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Discount Title" } })
+                    @Html.ValidationMessageFor(model => model.DiscountTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                Details
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.DiscountDetails, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Discount Details" } })
+                @Html.ValidationMessageFor(model => model.DiscountDetails, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                Image
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.DiscountImage, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Discount Image", Type = "file" } })
+                @Html.ValidationMessageFor(model => model.DiscountImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                On Which Category
+            </div>
+            <div class="col-md-5">
+                @Html.DropDownList("DiscountedProductCategoryID", new SelectList(ViewBag.AllCategories, "ID", "CategoryName"), new { @class = "form-control", style = "margin-top: 8px;font-family:Tahoma;font-size:medium;", @placeholder = "Select Category" })
+               @* @Html.EditorFor(model => model.DiscountedProductCategoryID, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Discount Category" } })*@
+                @Html.ValidationMessageFor(model => model.DiscountedProductCategoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                Product 
+            </div>
+            <div class="col-md-5">
+
+                @Html.DropDownList("DiscountProductID", new SelectList(ViewBag.AllVendorProduct, "ProductID", "ProductName"), new { @class = "form-control", style = "margin-top: 8px;font-family:Tahoma;font-size:medium;", @placeholder = "Select Product" })
+            @*    @Html.EditorFor(model => model.DiscountProductID, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.DiscountProductID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            <div class="col-md-2">
+                Start Date
+            
+        </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.DiscountStartDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", @type = "date", @value = DateTime.Now.ToShortDateString(), @Placeholder = "Start Date" } })
+                @Html.ValidationMessageFor(model => model.DiscountStartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                End Date
+
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.DiscountEndDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", @type = "date", @Placeholder = "End Date" } })
+                @Html.ValidationMessageFor(model => model.DiscountEndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                Discount Amount
+
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.DiscountAmount, new { htmlAttributes = new { @class = "form-control", @type = "Number", @Placeholder = "Discount Amount" } })
+                @Html.ValidationMessageFor(model => model.DiscountAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+               Amount Type (% / Rs)
+
+            </div>
+            <div class="col-md-5">
+                <select id="DiscountAmountType" name="DiscountAmountType"  class="form-control" style="margin-top: 8px;font-family:Tahoma;font-size:medium;">
+                    <option value="1">
+                        Percentage
+                    </option>
+                    <option value="2">
+                        Rupyee
+                    </option>
+                </select>
+                @*@Html.EditorFor(model => model.DiscountAmountType, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Discount Amount Type" } })*@
+                @Html.ValidationMessageFor(model => model.DiscountAmountType, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                Discount On ALL 
+                <input type="radio" name="IsAllProducts" id="IsAllProducts" value="true"/>
+
+            </div>
+            <div class="col-md-3">
+                Discount On Product <input type="radio" name="IsOnProducts" id="IsOnProducts" value="true" />
+            </div>
+            <div class="col-md-4">
+                Discount On Category <input type="radio" name="IsOnCategories" id="IsOnCategories" value="true" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-1">
+                    @{
+    int cnt = Convert.ToInt32(ViewBag.CountProd);
+    if (cnt == 0)
+    { <span class="danger small"> Please Add Product First to Add Discount</span>}
+    else
+    {<input type="submit" value="Create" class="btn btn-default" style="margin-top: 8px;font-family:Tahoma;font-size:medium; -webkit-border-radius: 0px;border:2px solid #0094ff;height:40px;color:#0094ff;background-color:#fff" /> }
+}
+                    
+                </div>
+                <div class="col-md-5">
+                    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-default", @style = "margin-top: 8px;font-family:Tahoma;font-size:medium; -webkit-border-radius: 0px;border:2px solid #0094ff;height:40px;color:#0094ff;background-color:#fff" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

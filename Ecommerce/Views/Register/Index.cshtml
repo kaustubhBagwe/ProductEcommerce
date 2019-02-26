@@ -1,0 +1,753 @@
+﻿@model  Ecommerce.Models.CustomerDetails
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Shoplootle" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>Register</title>
+    <style>
+        input, select {
+            display: inline-block;
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            padding: 10px 20px;
+            border: 1px solid #b7b7b7;
+            font: normal 20px/5px Arial, Helvetica, sans-serif;
+            color: #008ec6;
+            -o-text-overflow: clip;
+            border-radius: 0px;
+            text-overflow: clip;
+            background: rgba(252,252,252,1);
+            -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+            box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+            text-shadow: 0 0 0 rgba(255,255,255,0.66);
+            -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+            -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+            -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+            transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+        }
+
+        .wizard {
+            margin: 20px auto;
+            background: #fff;
+        }
+
+            .wizard .nav-tabs {
+                position: relative;
+                margin: 40px auto;
+                margin-bottom: 0;
+                border-bottom-color: #e0e0e0;
+            }
+
+            .wizard > div.wizard-inner {
+                position: relative;
+            }
+
+        .connecting-line {
+            height: 2px;
+            background: #e0e0e0;
+            position: absolute;
+            width: 80%;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: 50%;
+            z-index: 1;
+        }
+
+        .wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+            color: #555555;
+            cursor: default;
+            border: 0;
+            border-bottom-color: transparent;
+        }
+
+        span.round-tab {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            display: inline-block;
+            border-radius: 100px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            text-align: center;
+            font-size: 25px;
+        }
+
+            span.round-tab i {
+                color: #555555;
+            }
+
+        .wizard li.active span.round-tab {
+            background: #fff;
+            border: 2px solid #5bc0de;
+        }
+
+            .wizard li.active span.round-tab i {
+                color: #5bc0de;
+            }
+
+        span.round-tab:hover {
+            color: #333;
+            border: 2px solid #333;
+        }
+
+        .wizard .nav-tabs > li {
+            /*width: 25%;*/
+           width:50%;
+        }
+
+        .wizard li:after {
+            content: " ";
+            position: absolute;
+            left: 46%;
+            opacity: 0;
+            margin: 0 auto;
+            bottom: 0px;
+            border: 5px solid transparent;
+            border-bottom-color: #5bc0de;
+            transition: 0.1s ease-in-out;
+        }
+
+        .wizard li.active:after {
+            content: " ";
+            position: absolute;
+            left: 46%;
+            opacity: 1;
+            margin: 0 auto;
+            bottom: 0px;
+            border: 10px solid transparent;
+            border-bottom-color: #5bc0de;
+        }
+
+        .wizard .nav-tabs > li a {
+            width: 70px;
+            height: 70px;
+            margin: 20px auto;
+            border-radius: 100%;
+            padding: 0;
+        }
+
+            .wizard .nav-tabs > li a:hover {
+                background: transparent;
+            }
+
+        .wizard .tab-pane {
+            position: relative;
+            padding-top: 50px;
+        }
+
+        .wizard h3 {
+            margin-top: 0;
+        }
+
+        @@media( max-width : 585px ) {
+            #bannerspan {
+            font-size:30px;
+            }
+            .wizard {
+                width: 90%;
+                height: auto !important;
+            }
+
+            span.round-tab {
+                font-size: 16px;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+            }
+
+            .wizard .nav-tabs > li a {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+            }
+
+            .wizard li.active:after {
+                content: " ";
+                position: absolute;
+                left: 35%;
+            }
+
+            .mycss {
+                text-shadow: 1px 1px 1px rgba(255,255,0,1);
+                font-weight: normal;
+                text-transform: uppercase;
+                color: #3453BA;
+                background-color: #EFE8BF;
+                letter-spacing: 4pt;
+                word-spacing: 2pt;
+                font-size: 72px;
+                text-align: center;
+                font-family: comic sans, comic sans ms, cursive, verdana, arial, sans-serif;
+                line-height: 1;
+            }
+        }
+    </style>
+</head>
+@using (Html.BeginForm("Index", "Register", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <body>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    @*<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>*@
+                    <a class="navbar-brand" href="/">
+                        SHOPLOOTLE.COM
+                    </a>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div style="clear:both"></div>
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true }, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <div class="col-md-12 content">
+            <div class="container">
+                <div class="row">
+                    <section>
+                        <div class="wizard">
+                            <div class="wizard-inner">
+                                <div class="connecting-line"></div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                                            <span class="round-tab">
+                                                <i class="glyphicon glyphicon-list-alt"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    @*<li role="presentation" class="disabled">
+                                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                                            <span class="round-tab">
+                                                <i class="glyphicon glyphicon-paperclip"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li role="presentation" class="disabled">
+                                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                                            <span class="round-tab">
+                                                <i class="glyphicon glyphicon-tasks"></i>
+                                            </span>
+                                        </a>
+                                    </li>*@
+                                    <li role="presentation" class="disabled">
+                                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                                            <span class="round-tab">
+                                                <i class="glyphicon glyphicon-floppy-saved"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" role="tabpanel" id="step1">
+                                    <h3>Sign Up / Register</h3>
+                                    <div class="form-horizontal col-md-6 center-block">
+                                        @Html.ValidationSummary(true)
+                                        @Html.ValidationMessage("error")
+                                        <label id="lberror" style="color:red"></label>
+                                        <hr />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.CustEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your Current Email ID or Mobile Number", required = "required" } })*
+
+                                                <span style="color:#b7b7b7">Press Tab or GO after Entering proper email id or mobile number</span>
+                                                @Html.ValidationMessageFor(model => model.CustEmail, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                        </div>
+
+                                        <br />
+                                        <div class="form-group" id="EmailNumberCode">
+                                            <div class="col-md-2">
+                                                @Html.Label("Enter Code", new { @class = "control-label col-md-4" })
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" id="txtEmailNumberCode" placeholder="Enter Code" class="form-control" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="button" value="Check" id="btnChk1" class="btn btn-default prev-step" style="padding: 13px 20px;" />
+                                            </div>
+                                            <div style="clear:both"></div>
+                                            <div class="col-md-6 center-block">
+                                                <span style="color:red" id="Errormsg"></span>
+                                            </div>
+                                        </div>
+                                        <div id="dvAfteremailconfirm">
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    <input class="form-control text-box single-line" id="passwordrematch" name="passwordrematch" placeholder="Password" required="required" type="password" value="">
+
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Rewrite Password", @type = "Password" } })
+                                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.CustName, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Dispaly Name" } })
+                                                    @Html.ValidationMessageFor(model => model.CustName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-4">
+                                                    @Html.EditorFor(model => model.CustFName, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "First Name" } })
+
+                                                    @Html.ValidationMessageFor(model => model.CustFName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+
+                                                <div class="col-md-4">
+                                                    @Html.EditorFor(model => model.CustLName, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Last Name" } })
+                                                    @Html.ValidationMessageFor(model => model.CustLName, "", new { @class = "text-danger" })
+
+
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.CustAddress1, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Address 1" } })
+                                                    @Html.ValidationMessageFor(model => model.CustAddress1, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.CustAddress2, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Address 2" } })
+                                                    @Html.ValidationMessageFor(model => model.CustAddress2, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+
+
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @*@Html.EditorFor(model => model.CustState, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "State" } })*@
+
+
+                                                    @Html.DropDownList("CustState", new SelectList(ViewBag.citylist, "StateID", "StateName"), new { @class = "form-control", required = "required" })
+
+                                                    @Html.ValidationMessageFor(model => model.CustState, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+                                            @*<div class="form-group">
+
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.CustCity, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "City" } })
+                                                        @Html.ValidationMessageFor(model => model.CustCity, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                                </div>*@
+
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @*@Html.EditorFor(model => model.CustCountry, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Country" } })*@
+                                                    <select id="CustCity" class="form-control" required>
+                                                        <option>Select City</option>
+
+                                                    </select>
+                                                    @Html.ValidationMessageFor(model => model.CustCountry, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.CustPhone, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Phone" } })
+                                                    @Html.ValidationMessageFor(model => model.CustPhone, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.CustPostalCode, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Postal Code eg .400052" } })
+                                                    @Html.ValidationMessageFor(model => model.CustPostalCode, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.CustFax, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Fax Number" } })
+                                                    @Html.ValidationMessageFor(model => model.CustFax, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+
+
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.CustWebSite, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "WebSite" } })
+                                                    @Html.ValidationMessageFor(model => model.CustWebSite, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1"> <span style="color:red;font-size:larger;">*</span></div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-6">
+                                                    <ul class="list-inline">
+                                                        <li><button type="submit" class="btn btn-primary next-step">Save and continue</button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-horizontal col-md-6 center-block" style="background-color:#efe8bf;height:100%">
+
+                                        <div style="text-shadow: 1px 1px 1px rgba(255,255,0,1);
+                font-weight: normal;
+                text-transform: uppercase;
+                color: #3453BA;
+                background-color: #EFE8BF;
+                letter-spacing: 4pt;
+                word-spacing: 2pt;
+                font-size: 72px;
+                text-align: center;
+                font-family: comic sans, comic sans ms, cursive, verdana, arial, sans-serif;
+                line-height: 1;" id="bannerspan">join us to accelerate your Business on<br />E-Commerce Platform</div>
+
+
+                                    </div>
+                                </div>
+                                @*<div class="tab-pane" role="tabpanel" id="step2">
+                                    <h3>Upload Photo Identity Proof</h3>
+                                    <div class="col-md-12">
+                                        <br />
+                                        <div style="border:1px dotted #808080;height:140px;" class="center-block">
+                                            Drag and Drop
+                                            <br />
+                                            <input type="file" accept="*/image" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="step3">
+                                    <h3>Step 3</h3>
+                                    <p>This is step 3</p>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                    </ul>
+                                </div>*@
+                                <div class="tab-pane" role="tabpanel" id="complete">
+                                    <h3>Complete</h3>
+                                    <p>You have successfully completed all steps.</p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <footer class="pull-left footer">
+            <p class="col-md-12 center-block">
+                <hr class="divider">
+                &copy; @DateTime.Now.Year ShopLootle . All rights reserved.
+            </p>
+        </footer>
+        <div id="snackbar"></div>
+    </body>
+
+}
+
+</html>
+<script>
+    $(document).ready(function () {
+        $("#EmailNumberCode").hide();
+        $("#dvAfteremailconfirm").hide();
+        
+        $("#CustPhone").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            } 
+        });
+        $("#CustFax").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+        
+        $("#CustPostalCode").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+        $("#CustState").change(function () {
+            debugger
+            var Stateid = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Orders/CityList/',
+                data: { 'sid': Stateid },
+                success: function (item) {
+                    debugger
+                    var str = "<option>Select City</option>";
+                    $('#CustCity').empty();
+                    for (var i = 0; i < item.length; i++) {
+
+                        str += '<option value=' + $(item)[i].ID + '>' + $(item)[i].Text + '</option>';
+
+                    }
+                    $('#CustCity').html(str);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+        //Initialize tooltips
+        $('.nav-tabs > li a[title]').tooltip();
+        //Wizard
+        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+
+            var $target = $(e.target);
+
+            if ($target.parent().hasClass('disabled')) {
+                return false;
+            }
+        });
+        //$(".next-step").click(function (e) {
+
+        //    var $active = $('.wizard .nav-tabs li.active');
+        //    $active.next().removeClass('disabled');
+        //    nextTab($active);
+
+        //});
+        $(".prev-step").click(function (e) {
+
+            var $active = $('.wizard .nav-tabs li.active');
+            prevTab($active);
+
+        });
+
+        $('#CustEmail').blur(function () {
+            debugger
+            var testEmail = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (testEmail.test(this.value)) {
+                if (($(this).length != 0)) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Orders/OTPEmail/',
+                        data: { 'Email': this.value, 'EmailBody': 'Code :', 'Subject': 'Livingstud.com Thank you for Registring with us' },
+                        success: function (item) {
+                            debugger
+                            $("#EmailNumberCode").show();
+                            $('#snackbar').html('OTP sent to your respected Contact details.');
+                            myFunction();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                } else {
+                    $('#snackbar').html('Please enter Contact Details.');
+                    myFunction();
+                }
+            }
+            else {
+                var testEmail = /[0-9 -()+]+$/;
+                var num = $('#CustEmail').val();
+                if ((num.length != 10) || (!testEmail.test(this.value))) {
+                    $('#snackbar').html('Please enter a valid phone number.');
+                    myFunction();
+                    //alert('Please enter a valid phone number.');
+                    return false;
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Orders/OTPMobile/',
+                        data: { 'Number': $('#CustEmail').val(), 'EmailBody': 'Code :', 'Subject': 'Livingstud.com Thank you for Registring with us' },
+                        success: function (item) {
+                            debugger
+                            $("#EmailNumberCode").show();
+                            $('#snackbar').html('OTP sent to your respected Contact details.');
+                            myFunction();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            };
+        });
+        $('#btnChk1').click(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Orders/IsOTPChk/',
+                data: { 'OTPCHK': $("#txtEmailNumberCode").val(), 'OtpEmail': $("#CustEmail").val() },
+                success: function (item) {
+                    debugger
+                    if (item == "True") {
+
+                        $("#Errormsg").html('OTP Match')
+                        $("#dvAfteremailconfirm").show();
+                    } else {
+                        $("#Errormsg").html('OTP Dose Not Match')
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        });
+       
+        $("#Password").blur(function () {
+            debugger
+            var password = $("#Password").val();
+            var confirmPassword = $("#passwordrematch").val();
+            if (password != confirmPassword) {
+                $("#lberror").html('Password dose not match');
+                $("#lberror").focus();
+                $("#Password").val('');
+                $("#passwordrematch").val('');
+                $("#passwordrematch").focus();
+                return false;
+            } else {
+              
+                $("#lberror").html('  ')
+                return true;
+            }
+
+        });
+        $("input[type=text]").blur(function () {
+            debugger
+            var password = $(this).val();
+           
+            if (password='') {
+                $("#lberror").html('All Fill All Details');
+               
+                
+                $(this).focus();
+                return false;
+            } else {
+                $("#lberror").html('  ')
+                
+            }
+
+        });
+
+    });
+
+    function nextTab(elem) {
+        $(elem).next().find('a[data-toggle="tab"]').click();
+    }
+    function prevTab(elem) {
+        $(elem).prev().find('a[data-toggle="tab"]').click();
+    }
+    function myFunction() {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar")
+
+        // Add the "show" class to DIV
+        x.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
+</script>

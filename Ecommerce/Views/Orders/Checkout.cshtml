@@ -1,0 +1,876 @@
+﻿@model IEnumerable<Ecommerce.Models.Order>
+@using Ecommerce.DAL;
+@using Ecommerce.Models;
+@{
+    ViewBag.Title = "Checkout";
+    EcommerceDBContect db = new EcommerceDBContect();
+
+}
+<script src="~/js/jquery.min.js"></script>
+<!--cart-items-->
+<div class="cart-items">
+    <div class="container">
+        @*//mycalculation*@
+        @{
+
+            List<Order>
+                Lastormy = (List<Order>
+                    )Session["CartLst"];
+            if (Lastormy != null)
+            {
+                decimal Costval = 0;
+                for (int i = 0; i < Lastormy.Count; i++)
+                {
+                    Costval = Lastormy[i].PaidAount + Costval;
+                }
+                <h2>Order Summery Cart ( ₹ @Costval [ <span id="pCount">@ViewBag.PCount</span> ] )</h2>
+
+
+            }
+        }
+        @* //mycalculation*@
+        @{
+            var noprod = Session["noproduct"];
+            if (noprod != null)
+            {
+                if (noprod.ToString().Length > 0)
+                {
+                    <div class="alert alert-info">
+                        <strong>Warning ! </strong> OUT OF STOCK : Some of the selected Products are out of stock .
+                        <br /><br />
+                        <a id="RemoveoutofstockProducts" style="cursor:pointer">Remove out of stock Products</a>
+                    </div>
+                }
+            }
+        }
+
+
+        @*<div class="Total-bottom">
+                <div class="container btn_form" style="">
+                    <p><strong> Total Amt : ₹ @ViewBag.pTotalCost</strong> </p>
+                </div>
+            </div>*@
+        @if (Model != null && Model.Count() != 0)
+        {
+            <div style="clear:both"></div>
+            <br />
+            <div id="Product" class="collapse in">
+                @foreach (var item in Model)
+                {
+                    @*<script>
+                            $(document).ready(function (c) {
+                                $('.close1').on('click', function (c) {
+                                    $('.cart-header').fadeOut('slow', function (c) {
+                                        $('.close1').closest('.cart-header').remove();
+                                    });
+                                });
+                            });
+                        </script>*@
+                    <div class="cart-header">
+                        <div class="close1" pid="@item.ProducID"> </div>
+                        <div class="cart-sec simpleCart_shelfItem">
+                            <div class="cart-item cyc">
+                                @{
+                    var imgpath = db.ProductImage.Select(x => new { path = x.ImagePath, pid = x.IProductID }).Where(s => s.pid == @item.ProducID).FirstOrDefault();
+                    <img src="@imgpath.path" class="img-responsive" alt="">
+                                }
+                            </div>
+                            <div class="cart-item-info">
+                                @{
+                    var imgname = db.ProductDetails.Select(x => new { path = x.ProductName, pid = x.ProductID }).Where(s => s.pid == @item.ProducID).FirstOrDefault();
+                    var link = "http://livingstud.com/Products/Details/" + @item.ProducID;
+                    <h3><a href="@link">@imgname.path</a> </h3>
+
+                    var quantitylimit = db.ProductDetails.Select(x => new { path = x.ProductQuantity, pid = x.ProductID }).Where(x => x.pid == @item.ProducID).First();
+                    <table>
+                        <tr>
+                            <td>
+                                <span>Quantity : </span>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pipm" id="ProductQuantitypopup" pipm="@item.ProducID" min="1" max="@quantitylimit.path" value="@item.Quantity" style="width:150%">
+                            </td>
+                        </tr>
+                    </table>
+
+                                    @*<span>Quantity : @item.Quantity</span>*@
+
+
+
+                                }
+                                <ul class="qty">
+                                    <li>
+                                        <p>
+                                            @{
+
+                    bool isdisc = db.ProductDetails.Where(x => x.ProductID == item.ProducID).Select(x => x.IsDiscounted).FirstOrDefault();
+                    if (isdisc == true)
+                    {
+                        decimal amountdisc = db.ProductDetails.Where(x => x.ProductID == item.ProducID).Select(x => x.DiscountAmount).FirstOrDefault();
+
+                <li><p>Price : ₹ <strike>@item.VAT </strike>   @amountdisc</p></li>
+                    }
+                    else
+                    {
+                        <li><p>Price : ₹ @item.VAT</p></li>
+                    }
+
+                                            }</p></li>
+
+                                            <li><p><strong>Total Cost : ₹@item.PaidAount</strong></p></li>
+                                        </ul>
+                                        <div class="delivery">
+                                            @*<p>Service Charges : ₹10.00</p>*@
+                                            <span> Delivery by @DateTime.Now.AddDays(7).ToString("dd MMM yyyy")</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <hr />
+                }
+                <p style="text-align:right">
+                    <button type="button" class="btn btn-info" id="btnProductConfirmation">Procced</button>
+                </p>
+                <div style="clear:both"></div>
+            </div>
+
+            <div style="background-color:#FFD700;color:#000;padding:20px" id="divOrderSummery">
+                <h4 id="OrderSummery"></h4>
+            </div>
+            <hr />
+            <div id="CustDetails" class="collapse in">
+                @*Address details*@
+
+
+                @{
+                var data1 = Session["CustId"];
+                if (data1 != null)
+                {
+                    <div style="background-color:#0094ff;color:#fff;padding:20px">
+                        @{
+                    int cid = (int)data1;
+                    CustomerDetails cd = db.CustomerDetails.Where(x => x.CustID == cid).FirstOrDefault();
+                    string rmail = cd.CustEmail;
+                    <h4>@rmail</h4>
+                        }
+                        
+                    </div>
+                }
+                else
+                {
+                    using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <br />
+
+
+                        <div class="form-horizontal">
+                            <div style="background-color:#0094ff;color:#fff;padding:20px">
+                                <h4>Please Sign In Here</h4>
+                            </div>
+                            <br />
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <h4> Quick Sign Up</h4>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Mobile Number/Email", new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <input type="text" id="EmailNumber" placeholder="Enter Mobile Number or Email ID" class="form-control col-md-4" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" >
+
+                                            <div class="col-md-8">
+                                                <button type="button" id="btnchkemail" class="btn btn-info">Send</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="ForgetPass" style="display:none">
+
+                                            <div class="col-md-4">
+                                                Please Sign in with <label id="lbexisting"></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="EmailNumberCode">
+                                            @Html.Label("Enter Code", new { @class = "control-label col-md-4" })
+                                            <div class="col-md-4">
+                                                <input type="text" id="txtEmailNumberCode" placeholder="Enter Code" class="form-control" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="button" value="Check" id="btnChk" class="btn btn-info" />
+                                            </div>
+                                            <center>
+                                                <p><span id="Errormsg"></span></p>
+                                            </center>
+                                        </div>
+                                        <div class="form-group" id="pass1">
+                                            @Html.Label("Enter Password", new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <input type="password" placeholder="Enter Password" class="form-control" id="txtpass1" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="pass2">
+                                            @Html.Label("Re Enter Password", new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <input type="password" placeholder="ReEnter passsword" class="form-control" id="txtpass2" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="pass2">
+                                           
+                                            <div class="col-md-8">
+                                                <button type="button" id="btnchkpass" class="btn btn-info">Check</button>
+                                            </div>
+                                        </div>
+                                        <center>
+                                            <p><span id="Errormsg1"></span></p>
+                                        </center>
+                                        <div class="form-group" id="btnSubmit">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="button" value="Sign Up" class="btn btn-info" id="btnsignup1" />
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <h4>Sign IN </h4>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div class="col-md-8">
+                                                <a href="#" data-toggle="modal" data-target="#myModal1"><small><span class="btn btn-info" aria-hidden="true">Login</span></small></a>
+
+                                            </div>
+                                        </div>
+                                        @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                            {@Html.AntiForgeryToken()
+
+                                                <div class="form-group">
+                                                    @Html.Label("Email ID", new { @class = "control-label col-md-4" })
+
+                                                    <div class="col-md-8">
+                                                        @Html.TextBox("Email")
+                                                        @Html.ValidationMessage("Email", "", new { @class = "text-danger" })
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.Label("Password", new { @class = "control-label col-md-4" })
+                                                    <div class="col-md-8">
+                                                        @Html.Password("Password")
+                                                        @Html.ValidationMessage("Password")
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <input type="submit" value="Log In" class="btn btn-info" />
+                                                    </div>
+                                                </div>
+                                            }*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+
+
+                        </div>
+
+                    }
+                }
+                }
+
+
+                @*Address Details*@
+            </div>
+
+            <div style="background-color:#0094ff;color:#fff;padding:20px" id="divCustSummery">
+                <h4 id="CustSummery"></h4>
+            </div>
+            <hr />
+
+            <div id="CustAddress" class="collapse in">
+                @*Address details*@
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <br />
+                    <div class="form-horizontal">
+                        <div style="background-color:#0094ff;color:#fff;padding:20px">
+                            <h4>DELIVERY ADDRESS</h4>
+                        </div>
+                        <br />
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+
+                                <div class="form-group">
+                                    @Html.Label("First Name", new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        <input type="text" id="FirstName" placeholder="Enter First Name" class="form-control col-md-4" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Last Name", new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        <input type="text" id="LastName" placeholder="Enter Last Name" class="form-control col-md-4" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("CustState", new SelectList(ViewBag.citylist, "StateID", "StateName"), new { @class = "form-control", style = "margin-top: 8px;font-family:Tahoma;font-size:medium;" })
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("City", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        <select id="CustCity" class="form-control"></select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Pincode", new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        <input type="text" id="Pincode" placeholder="Enter Pincode" class="form-control col-md-4" />
+                                    </div>
+                                </div>
+                                <div class="form-group" id="EmailNumberCode">
+                                    @Html.Label("Address", new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        <input type="text" id="txtAddress" placeholder="Address" class="form-control" />
+                                    </div>
+
+                                </div>
+                                <div class="form-group" id="pass1">
+                                    @Html.Label("Phone Number", new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        <input type="text" placeholder="Enter Phone Number" class="form-control" id="txtPhone" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group" id="btnSubmit">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="button" value="Save and Continue" class="btn btn-info" id="btnAddress" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                }
+                @*Address Details*@
+            </div>
+
+            <div style="background-color:#DC143C;color:#fff;padding:20px" id="divCustAddress">
+                <h4 id="CustAddressafter"></h4>
+            </div>
+            <hr />
+            <p>
+                @*<input type="button" value="Make Payment" class="btn btn-group-lg" id="btnPayment" />*@
+                <button id="rzp-button1" class="btn btn-group-lg">Make Payment</button>
+                <button id="vol" class="btn btn-group-lg">Test payment</button>
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                <script>
+
+                    $("#vol").click(function () {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Orders/MakePayment/',
+                            data: {},
+                            success: function (item) {
+                                debugger
+                                if (item > 0) {
+                                    window.location.href = '/Orders/paymentsuccessfull?orderid=' + item;
+                                } else {
+
+                                }
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        });
+                    });
+
+                    var totalcost = parseInt('@ViewBag.pTotalCostdec');
+                    var options = {
+
+                        "key": "rzp_live_67aIqy0kwqxWoq",
+                        "amount": totalcost, // 2000 paise = INR 20
+                        "name": "Shoplootle.com",
+                        "description": "Purchase Description",
+                        "image": "/your_logo.png",
+                        "handler": function (response) {
+                            // alert(response.razorpay_payment_id);
+                            $.ajax({
+                                type: 'POST',
+                                url: '/Orders/MakePayment/',
+                                data: {},
+                                success: function (item) {
+                                    debugger
+                                    if (item > 0) {
+                                        window.location.href = '/Orders/paymentsuccessfull?orderid=' + item;
+                                    } else {
+
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                }
+                            });
+                        },
+                        "prefill": {
+                            "name": "",
+                            "email": ""
+                        },
+                        "notes": {
+                            "address": ""
+                        },
+                        "theme": {
+                            "color": "#F37254"
+                        }
+                    };
+                    if (typeof response.razorpay_payment_id == 'undefined' || response.razorpay_payment_id < 1) {
+                        redirect_url = '/you-owe-money.html';
+                    } else {
+                        redirect_url = '/thnx-you-paid.html';
+                    }
+                    location.href = redirect_url;
+                    var rzp1 = new Razorpay(options);
+
+                    document.getElementById('rzp-button1').onclick = function (e) {
+                        debugger
+
+                        rzp1.open();
+                        e.preventDefault();
+                    }
+                </script>
+            </p>
+            <p>
+                <h4 id="PaymentSuccess"></h4>
+            </p>
+        }
+        else
+        {
+            <div>
+                <div style="clear:both"></div>
+                <div style="background-color:#0094ff;color:#fff;padding:20px">
+                    <h4> No Product Selected <a href="/" style="color:#ffd800">Click here to Search Product</a>  </h4>
+                </div>
+            </div>
+        }
+        <div id="snackbar"></div>
+    </div>
+</div>
+<div style="clear:both"></div>
+@*<div class="Total-bottom">
+        <div class="container btn_form" style="text-align:right">
+            <p><strong> Total Amt : ₹ @ViewBag.pTotalCost</strong> </p>
+        </div>
+    </div>*@
+<!--//checkout-->
+<script>
+    $(document).ready(function () {
+        $("#EmailNumberCode").hide();
+        $("#pass1").hide();
+        $("#pass2").hide();
+        $("#btnSubmit").hide();
+        $("#divOrderSummery").hide();
+        $("#divCustSummery").hide();
+        $("#CustAddress").hide();
+        $("#divCustAddress").hide();
+        $('#rzp-button1').hide();
+        $("#btnchkpass").hide();
+        $('div#CustDetails').hide(500);
+        $('#btnProductConfirmation').click(function () {
+            $('div#CustDetails').show(500);
+            var session = '@Session["CustId"]';
+            if (session != '') {
+                $("#CustAddress").show();
+                $("#btnSubmit").show();
+            }
+            $('div#product').hide(500);
+            $('#OrderSummery').html('Order Summery : ' +@ViewBag.PCount +' item , Total : ' +@ViewBag.pTotalCost +'.Rs')
+            $("#divOrderSummery").show();
+        });
+        $(".pipm").change(function () {
+            var quantity = $(this).val();
+            var pipm = $(this).attr('pipm');
+            debugger
+            $.ajax({
+                type: "POST",
+                url: '/Products/Updatescart',
+                data: { 'pid': pipm, 'qty': quantity },
+                success: function (item) {
+
+                    window.location.href = "http://livingstud.com/Orders/Checkout";
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+        $('#btnchkemail').click(function () {
+            $('#btnchkemail').text('Sending. . .')
+            debugger
+            var em = $("#EmailNumber").val();
+            var testEmail = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (testEmail.test(em)) {
+                if (($(em).length != 0)) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Orders/OTPEmail/',
+                        data: { 'Email': this.value, 'EmailBody': 'Code :', 'Subject': 'Livingstud.com Thank you for Registring with us' },
+                        success: function (item) {
+                            debugger
+
+                            if (item == "False") {
+                                $('#btnchkemail').text('Resend');
+                                $('#snackbar').html('This User Exist');
+                                myFunction();
+                                $("#EmailNumberCode").hide();
+
+                                var valofcust = $("#EmailNumber").val();
+                                $("#lbexisting").html(valofcust);
+                                $("#ForgetPass").css('display', 'block')
+                            } else {
+                                $("#ForgetPass").css('display', 'none')
+
+                                $("#EmailNumberCode").show();
+                                $('#snackbar').html('OTP sent to your respected Contact details.');
+                                $('#btnchkemail').hide();
+                                myFunction();
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                } else {
+                    $('#snackbar').html('Please enter Contact Details.');
+                    myFunction();
+                }
+            }
+            else {
+                var testEmail = /[0-9 -()+]+$/;
+                var num = em;
+                if ((num.length != 10) || (!testEmail.test(em))) {
+                    $('#snackbar').html('Please enter a valid phone number.');
+                    myFunction();
+                    //alert('Please enter a valid phone number.');
+                    return false;
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Orders/OTPMobile/',
+                        data: { 'Number': em, 'EmailBody': 'Code :', 'Subject': 'Livingstud.com Thank you for Registring with us' },
+                        success: function (item) {
+                            debugger
+                            if (item == "False") {
+                                $('#snackbar').html('This User Exist');
+                                myFunction();
+                                $("#EmailNumberCode").hide();
+
+                                var valofcust = $("#EmailNumber").val();
+                                $("#lbexisting").html(valofcust);
+                                $("#ForgetPass").css('display', 'block')
+                            } else {
+                                $('#btnchkemail').text('Resend');
+                                $("#ForgetPass").css('display', 'none')
+                                $("#EmailNumberCode").show();
+                                $('#snackbar').html('OTP sent to your respected Contact details.');
+                                $('#btnchkemail').hide();
+                                myFunction();
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            };
+        });
+        $('#btnChk').click(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Orders/IsOTPChk/',
+                data: { 'OTPCHK': $("#txtEmailNumberCode").val(), 'OtpEmail': $("#EmailNumber").val() },
+                success: function (item) {
+                    debugger
+                    if (item == "True") {
+                        $("#pass1").show();
+                        $("#pass2").show();
+                        $("#btnchkpass").show();
+                        $('#snackbar').html('OTP Match');
+                        myFunction();
+                        //$("#Errormsg").html('OTP Match')
+                    } else {
+                        $('#snackbar').html('OTP Dose Not Match');
+                        myFunction();
+                        //$("#Errormsg").html('OTP Dose Not Match')
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        });
+        $("#btnchkpass").click(function () {
+            var password = $("#txtpass1").val();
+            var confirmPassword = $("#txtpass2").val();
+            if (password != confirmPassword) {
+                $('#snackbar').html('Password dose not match');
+                myFunction();
+                //$("#Errormsg1").html('Password dose not match')
+                $("#btnSubmit").hide();
+                return false;
+            } else {
+                $("#btnSubmit").show();
+                $("#Errormsg1").html('  ')
+                return true;
+            }
+
+        });
+        $('#btnsignup1').click(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Orders/CreateNewCustomer/',
+                data: { 'Emailormobile': $("#EmailNumber").val(), 'password': $("#txtpass1").val() },
+                success: function (item) {
+                    debugger
+
+                    if (item > 0) {
+                        $('div#CustDetails').hide(500);
+                        $("#CustSummery").html('Register ID : ' + $("#EmailNumber").val());
+                        $("#divCustSummery").show();
+                        $("#CustAddress").show();
+
+                    } else {
+
+                    }
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        });
+
+        $('#btnAddress').click(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Orders/UpdateNewCustomer/',
+                data: { 'FirstName': $("#FirstName").val(), 'LastName': $("#LastName").val(), 'CustState': $("#CustState").val(), 'CustCity': $("#CustCity").val(), 'Pincode': $("#Pincode").val(), 'address': $("#txtAddress").val(), 'Phone': $("#txtPhone").val() },
+                success: function (item) {
+                    debugger
+                    if (item = 'true') {
+                        $('#CustAddress').hide(500);
+                        $("#CustAddressafter").html($("#FirstName").val() + ' ' + $("#LastName").val() + ' ' + $("#txtAddress").val() + ' , ' + $("#Pincode").val() + ' , ' + $("#txtPhone").val());
+                        $("#divCustSummery").show();
+                        $('#rzp-button1').show();
+                        $('#divCustAddress').show();
+                    } else {
+
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        });
+        $("#CustState").change(function () {
+            debugger
+            var Stateid = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Orders/CityList/',
+                data: { 'sid': Stateid },
+                success: function (item) {
+                    debugger
+                    var str = "<option>Select City</option>";
+                    $('#CustCity').empty();
+                    for (var i = 0; i < item.length; i++) {
+
+                        str += '<option value=' + $(item)[i].ID + '>' + $(item)[i].Text + '</option>';
+
+                    }
+                    $('#CustCity').html(str);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+        $('#rzp-button1').click(function () {
+
+            //$.ajax({
+            //    type: 'POST',
+            //    url: '/Orders/MakePayment/',
+            //    data: {},
+            //    success: function (item) {
+            //        debugger
+            //        if (item > 0) {
+            //            $('#rzp-button1').hide()
+            //            console.log(item)
+            //            $('#snackbar').html('Payment Processing...');
+            //            myFunction();
+            //            $("#PaymentSuccess").html('Payment Processing...');
+            //        } else {
+
+            //        }
+            //    },
+            //    error: function (error) {
+            //        console.log(error);
+            //    }
+            //});
+
+        });
+        $("#RemoveoutofstockProducts").click(function () {
+            var pid = '@Session["noproduct"]';
+            var split = pid.split(',');
+            for (var i = 0; i < split.length; i++) {
+                if (split[i].length > 0) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Products/removescart/',
+                        data: { 'pid': split[i] },
+                        success: function (item) {
+                            debugger
+                            window.location.reload();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            }
+            location.reload();
+        });
+        $('.close1').click(function () {
+            var pid = $(this).attr('pid');
+
+            $.ajax({
+                type: 'POST',
+                url: '/Products/removescart/',
+                data: { 'pid': pid },
+                success: function (item) {
+                    debugger
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+    function myFunction() {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar")
+
+        // Add the "show" class to DIV
+        x.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
+</script>
+<style>
+    input[type=text] {
+    border:1px solid #333;
+    border-radius:0px;
+    }
+    /* The snackbar - position it at the bottom and in the middle of the screen */
+    #snackbar {
+        visibility: hidden; /* Hidden by default. Visible on click */
+        min-width: 250px; /* Set a default minimum width */
+        margin-left: -125px; /* Divide value of min-width by 2 */
+        background-color: #333; /* Black background color */
+        color: #fff; /* White text color */
+        text-align: center; /* Centered text */
+        border-radius: 2px; /* Rounded borders */
+        padding: 16px; /* Padding */
+        position: fixed; /* Sit on top of the screen */
+        z-index: 1; /* Add a z-index if needed */
+        left: 50%; /* Center the snackbar */
+        bottom: 30px; /* 30px from the bottom */
+    }
+
+        /* Show the snackbar when clicking on a button (class added with JavaScript) */
+        #snackbar.show {
+            visibility: visible; /* Show the snackbar */
+            /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+        However, delay the fade out process for 2.5 seconds */
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+    /* Animations to fade the snackbar in and out */
+    @@-webkit-keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+
+    @@keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+
+    @@-webkit-keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
+    }
+
+    @@keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
+    }
+</style>

@@ -77,6 +77,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -197,28 +205,66 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminStoresController.cs" />
+    <Compile Include="Controllers\BannersController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
+    <Compile Include="Controllers\ColorsController.cs" />
     <Compile Include="Controllers\CustomerDetailsController.cs" />
     <Compile Include="Controllers\DashbordController.cs" />
+    <Compile Include="Controllers\DiscountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderLogsController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductDetailsController.cs" />
+    <Compile Include="Controllers\ProductReviewsController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\SizesController.cs" />
+    <Compile Include="Controllers\StatesController.cs" />
+    <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\SubsubCategoriesController.cs" />
     <Compile Include="Controllers\tbl_UserDetailsController.cs" />
+    <Compile Include="Controllers\WishListsController.cs" />
     <Compile Include="DAL\EcommerceDBContect.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Admin\AdminStore.cs" />
+    <Compile Include="Models\Admin\Banner.cs" />
+    <Compile Include="Models\Admin\Brands.cs" />
+    <Compile Include="Models\Admin\Category.cs" />
+    <Compile Include="Models\Admin\City.cs" />
+    <Compile Include="Models\Admin\Color.cs" />
     <Compile Include="Models\Admin\CustomerDetails.cs" />
+    <Compile Include="Models\Admin\Discount.cs" />
+    <Compile Include="Models\Admin\FanBook.cs" />
+    <Compile Include="Models\Admin\ManageViewModels.cs" />
+    <Compile Include="Models\Admin\Order.cs" />
+    <Compile Include="Models\Admin\OrderedItems.cs" />
+    <Compile Include="Models\Admin\OrderLog.cs" />
+    <Compile Include="Models\Admin\OTP.cs" />
     <Compile Include="Models\Admin\ProductDetails.cs" />
+    <Compile Include="Models\Admin\ProductImage.cs" />
+    <Compile Include="Models\Admin\ProductReviews.cs" />
+    <Compile Include="Models\Admin\Register.cs" />
+    <Compile Include="Models\Admin\Roles.cs" />
+    <Compile Include="Models\Admin\Size.cs" />
+    <Compile Include="Models\Admin\State.cs" />
+    <Compile Include="Models\Admin\SubCategory.cs" />
+    <Compile Include="Models\Admin\SubsubCategory.cs" />
+    <Compile Include="Models\Admin\TargetProducts.cs" />
+    <Compile Include="Models\Admin\WishList.cs" />
     <Compile Include="Models\DBInteractor.cs" />
     <Compile Include="Models\EmailHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Admin\tbl_UserDetails.cs" />
-    <Compile Include="Models\SizeMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1785,6 +1831,7 @@
     <Content Include="Content\AdminContent\vendor\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2027,6 +2074,89 @@
     <Content Include="Views\AdminStores\Details.cshtml" />
     <Content Include="Views\AdminStores\Edit.cshtml" />
     <Content Include="Views\AdminStores\Index.cshtml" />
+    <Content Include="Views\Banners\Create.cshtml" />
+    <Content Include="Views\Banners\Delete.cshtml" />
+    <Content Include="Views\Banners\Details.cshtml" />
+    <Content Include="Views\Banners\Edit.cshtml" />
+    <Content Include="Views\Banners\Index.cshtml" />
+    <Content Include="Views\Brands\Create.cshtml" />
+    <Content Include="Views\Brands\Delete.cshtml" />
+    <Content Include="Views\Brands\Details.cshtml" />
+    <Content Include="Views\Brands\Edit.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Type.cshtml" />
+    <Content Include="Views\Cities\Create.cshtml" />
+    <Content Include="Views\Cities\Delete.cshtml" />
+    <Content Include="Views\Cities\Details.cshtml" />
+    <Content Include="Views\Cities\Edit.cshtml" />
+    <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\Colors\Create.cshtml" />
+    <Content Include="Views\Colors\Delete.cshtml" />
+    <Content Include="Views\Colors\Details.cshtml" />
+    <Content Include="Views\Colors\Edit.cshtml" />
+    <Content Include="Views\Colors\Index.cshtml" />
+    <Content Include="Views\Discounts\Create.cshtml" />
+    <Content Include="Views\Discounts\Delete.cshtml" />
+    <Content Include="Views\Discounts\Details.cshtml" />
+    <Content Include="Views\Discounts\Edit.cshtml" />
+    <Content Include="Views\Discounts\Index.cshtml" />
+    <Content Include="Views\OrderLogs\Create.cshtml" />
+    <Content Include="Views\OrderLogs\Delete.cshtml" />
+    <Content Include="Views\OrderLogs\Details.cshtml" />
+    <Content Include="Views\OrderLogs\Edit.cshtml" />
+    <Content Include="Views\OrderLogs\Index.cshtml" />
+    <Content Include="Views\Orders\Checkout.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\OrderTrack.cshtml" />
+    <Content Include="Views\Orders\Paymentsuccessfull.cshtml" />
+    <Content Include="Views\ProductReviews\Create.cshtml" />
+    <Content Include="Views\ProductReviews\Delete.cshtml" />
+    <Content Include="Views\ProductReviews\Details.cshtml" />
+    <Content Include="Views\ProductReviews\Edit.cshtml" />
+    <Content Include="Views\ProductReviews\Index.cshtml" />
+    <Content Include="Views\Register\Create.cshtml" />
+    <Content Include="Views\Register\Delete.cshtml" />
+    <Content Include="Views\Register\Details.cshtml" />
+    <Content Include="Views\Register\Edit.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Sizes\Create.cshtml" />
+    <Content Include="Views\Sizes\Delete.cshtml" />
+    <Content Include="Views\Sizes\Details.cshtml" />
+    <Content Include="Views\Sizes\Edit.cshtml" />
+    <Content Include="Views\Sizes\Index.cshtml" />
+    <Content Include="Views\States\Create.cshtml" />
+    <Content Include="Views\States\Delete.cshtml" />
+    <Content Include="Views\States\Details.cshtml" />
+    <Content Include="Views\States\Edit.cshtml" />
+    <Content Include="Views\States\Index.cshtml" />
+    <Content Include="Views\SubCategories\Create.cshtml" />
+    <Content Include="Views\SubCategories\Delete.cshtml" />
+    <Content Include="Views\SubCategories\Details.cshtml" />
+    <Content Include="Views\SubCategories\Edit.cshtml" />
+    <Content Include="Views\SubCategories\Index.cshtml" />
+    <Content Include="Views\SubsubCategories\Create.cshtml" />
+    <Content Include="Views\SubsubCategories\Delete.cshtml" />
+    <Content Include="Views\SubsubCategories\Details.cshtml" />
+    <Content Include="Views\SubsubCategories\Edit.cshtml" />
+    <Content Include="Views\SubsubCategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
