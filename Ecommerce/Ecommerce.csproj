@@ -211,6 +211,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\ColorsController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CustomerDetailsController.cs" />
     <Compile Include="Controllers\DashbordController.cs" />
     <Compile Include="Controllers\DiscountsController.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Models\Admin\Category.cs" />
     <Compile Include="Models\Admin\City.cs" />
     <Compile Include="Models\Admin\Color.cs" />
+    <Compile Include="Models\Admin\Country.cs" />
     <Compile Include="Models\Admin\CustomerDetails.cs" />
     <Compile Include="Models\Admin\Discount.cs" />
     <Compile Include="Models\Admin\FanBook.cs" />
@@ -2157,6 +2159,11 @@
     <Content Include="Views\SubsubCategories\Details.cshtml" />
     <Content Include="Views\SubsubCategories\Edit.cshtml" />
     <Content Include="Views\SubsubCategories\Index.cshtml" />
+    <Content Include="Views\Countries\Create.cshtml" />
+    <Content Include="Views\Countries\Delete.cshtml" />
+    <Content Include="Views\Countries\Details.cshtml" />
+    <Content Include="Views\Countries\Edit.cshtml" />
+    <Content Include="Views\Countries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
