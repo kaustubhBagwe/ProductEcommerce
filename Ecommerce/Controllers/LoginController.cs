@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Ecommerce.Models;
 using Ecommerce.DAL;
 using Ecommerce.ModelsnPlace;
+using System.Security.Claims;
 
 namespace Ecommerce.Controllers
 {
@@ -13,12 +14,21 @@ namespace Ecommerce.Controllers
     {
         private DBInteractor _DbExcecution = new DBInteractor();
         private EcommerceDBContect _dbCon = new EcommerceDBContect();
-        public ActionResult Index()
+        [AllowAnonymous]
+      
+        public ActionResult Index(string returnUrl)
         {
-            return View();
+            var model = new LoginViewModel
+            {
+                ReturnUrl = returnUrl
+            };
+
+            return View(model);
         }
         [HttpPost]
-        public ActionResult Index(tbl_UserDetails _userDetails)
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Index(LoginViewModel _userDetails)
         {
             try
             {
@@ -35,8 +45,22 @@ namespace Ecommerce.Controllers
                     }
                     else
                     {
+                        var identity = new ClaimsIdentity(new[] {
+                new Claim(ClaimTypes.Name, _userDetails.Email),
+                new Claim(ClaimTypes.Email, _userDetails.Email),
+                new Claim(ClaimTypes.Country, "India"),
+                 new Claim(ClaimTypes.Authentication, _udresult.ToString())
+            },
+           "ApplicationCookie");
+
+                        var ctx = Request.GetOwinContext();
+                        var authManager = ctx.Authentication;
+
+                        authManager.SignIn(identity);
                         Session["AuthID"] = _udresult.ToString();
-                        return Redirect("http://localhost:36906/Dashbord");
+                        return Redirect(GetRedirectUrl(null));
+
+                        //return Redirect("http://localhost:36906/Dashbord");
                         //TempData["message"] = _udresult;
                         //return View();
                     }
@@ -54,7 +78,15 @@ namespace Ecommerce.Controllers
             }
             return View();
         }
+        private string GetRedirectUrl(string returnUrl)
+        {
+            if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
+            {
+                return Url.Action("index", "Dashbord");
+            }
 
+            return returnUrl;
+        }
 
         public ActionResult ForgetPassword()
         {
@@ -123,6 +155,13 @@ namespace Ecommerce.Controllers
             }
             return View();
         }
+        public ActionResult LogOut()
+        {
+            var ctx = Request.GetOwinContext();
+            var authManager = ctx.Authentication;
 
+            authManager.SignOut("ApplicationCookie");
+            return RedirectToAction("index", "Login");
+        }
     }
 }

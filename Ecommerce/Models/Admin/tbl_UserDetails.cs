@@ -39,6 +39,8 @@ namespace Ecommerce.Models
 
         public string Password { get; set; }
 
+        [NotMapped]
+        public string ReturnUrl { get; set; }
     }
 
 }

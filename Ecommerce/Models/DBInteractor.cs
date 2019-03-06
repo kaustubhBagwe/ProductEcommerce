@@ -22,7 +22,7 @@ namespace Ecommerce.Models
 
         }
         //Application Login
-        public string AppLogin(tbl_UserDetails _data)
+        public string AppLogin(LoginViewModel _data)
         {
             // UserDetails _UD = new UserDetails();
             string _UD = "";
@@ -37,7 +37,7 @@ namespace Ecommerce.Models
                 string query = "sp_UserLogin";   //stored procedure Name
                 SqlCommand com = new SqlCommand(query, con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@userID", _data.UserEmailID);   //for username 
+                com.Parameters.AddWithValue("@userID", _data.Email);   //for username 
                 com.Parameters.AddWithValue("@password", _data.Password);  //for word
                 string ipaddress = GetLocalIPAddress();
                 com.Parameters.AddWithValue("@deviceid", ipaddress ?? "");  //for word

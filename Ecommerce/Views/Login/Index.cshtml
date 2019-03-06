@@ -1,4 +1,4 @@
-﻿
+﻿@model Ecommerce.Models.LoginViewModel
 @{
     ViewBag.Title = "Index";
     Layout = null;
@@ -30,10 +30,11 @@
             <div class="card-body">
                 @using (Html.BeginForm())
                 {
+                    @*@Html.AntiForgeryToken()*@
                     <div class="form-group">
                         <div class="form-label-group">
                             @*@Html.EditorFor(c=>c.UserEmailID,"", new { name = "UserEmailID" ,@class="form-control" ,@placeholder="Email address" ,@required="required", @autofocus="autofocus" ,type= "email" })*@
-                            <input type="email" id="UserEmailID" name="UserEmailID" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+                            <input type="email" id="Email" name="Email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
                             <label for="UserEmailID">Email address</label>
                         </div>
                     </div>
