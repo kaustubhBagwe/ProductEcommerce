@@ -49,6 +49,7 @@ namespace Ecommerce.Controllers
                 new Claim(ClaimTypes.Name, _userDetails.Email),
                 new Claim(ClaimTypes.Email, _userDetails.Email),
                 new Claim(ClaimTypes.Country, "India"),
+                  //new Claim(ClaimTypes.NameIdentifier, _udresult),
                  new Claim(ClaimTypes.Authentication, _udresult.ToString())
             },
            "ApplicationCookie");

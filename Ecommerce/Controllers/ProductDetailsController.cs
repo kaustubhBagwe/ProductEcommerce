@@ -17,12 +17,14 @@ namespace Ecommerce.Controllers
         private EcommerceDBContect db = new EcommerceDBContect();
 
         // GET: ProductDetails
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
             return View(await db.ProductDetails.OrderByDescending(x=>x.InsertDate).ToListAsync());
         }
 
         // GET: ProductDetails/Details/5
+        [AllowAnonymous]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Ecommerce.Controllers
         }
 
         // GET: ProductDetails/Create
+        [AllowAnonymous]
         public ActionResult Create()
         {
             ViewBag._size_RK = db.Sizes.Where(c => c.IsActive == true).ToList();
